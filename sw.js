@@ -1,6 +1,6 @@
 /* All South 2026 — service worker
    Bump CACHE when you change index.html or data.js so phones pick it up. */
-const CACHE = 'as26-v4';
+const CACHE = 'as26-v5';
 
 const SHELL = [
   './',

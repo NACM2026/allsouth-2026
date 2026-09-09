@@ -65,7 +65,15 @@ const AGENDA = {
   wed: [
     {
       start: "11:30", end: "15:00", room: "Statler Foyer",
-      title: "Attendee Check-in Open", kind: "logistics"
+      title: "Attendee Check-in Open", kind: "logistics",
+      desc: "Pick up your badge and lanyard in the Statler Foyer. Lanyards are courtesy of Handle.com.",
+      sponsor: { name: "Handle.com", logo: "assets/logos/handle.png" }
+    },
+    {
+      start: "11:30", end: "15:00", room: "Statler Foyer",
+      title: "Welcome Gift for Attendees", kind: "logistics",
+      desc: "Don't leave the registration table without your welcome gift — a thank-you to every attendee, provided by Emagia.",
+      sponsor: { name: "Emagia", logo: "assets/logos/emagia.png" }
     },
     {
       start: "11:30", end: "15:00", room: "Statler Foyer",
@@ -113,7 +121,11 @@ const AGENDA = {
   ],
 
   thu: [
-    { start: "08:00", end: "15:45", room: "Statler Foyer", title: "Check-In Open", kind: "logistics" },
+    {
+      start: "08:00", end: "15:45", room: "Statler Foyer", title: "Check-In Open", kind: "logistics",
+      desc: "Registration stays open through the afternoon in the Statler Foyer. Lanyards are courtesy of Handle.com.",
+      sponsor: { name: "Handle.com", logo: "assets/logos/handle.png" }
+    },
     { start: "08:00", end: "09:00", room: "Statler 456", title: "Breakfast", kind: "meal" },
     {
       start: "09:00", end: "10:00", room: "Statler 456", kind: "keynote",

@@ -17,7 +17,7 @@ URIs and there is nothing nested left to lose.
 | `data.js` | **All content and settings** — agenda, wifi, roster URL, sponsors, exhibitors, links | **Yes — this is the only file you normally touch** |
 | `logos.js` | Every logo and the wordmark, embedded as data URIs. Generated — don't hand-edit | No |
 | `index.html` | The app itself (layout, styling, behavior) | Rarely |
-| `sw.js` | Offline caching. Bump `CACHE = 'as26-v4'` → `'as26-v5'` (and so on) when you change content | Only to force a refresh |
+| `sw.js` | Offline caching. Bump `CACHE = 'as26-v5'` → `'as26-v6'` (and so on) when you change content | Only to force a refresh |
 | `manifest.json` | Makes it installable to a phone home screen | No |
 | `icon-*.png` | Home-screen icons (4 files) | No |
 | `roster-template.csv` | Starter file for the attendee Google Sheet | Not part of the app |
@@ -163,8 +163,8 @@ The logo then shows on the agenda card *and* large in the session detail sheet. 
 | Thursday Breaks (all 3) | NCS Credit |
 | Thursday PM Reception at The Henley | NACM National Trade Credit Report |
 | Friday Prize Drawings | Pierson Ferdinand LLP |
-| Registration Lanyards | Handle.com *(Info tab only)* |
-| Welcome Gift for Attendees | Emagia *(Info tab only)* |
+| Attendee Check-in + Thursday Check-In (lanyards) | Handle.com |
+| Welcome Gift for Attendees *(own line under registration)* | Emagia |
 
 The All South Portal Button sponsors (UTA, Zoom Lien) are deliberately left off —
 two commented lines at the end of `SPONSORS` in `data.js` will restore them.
