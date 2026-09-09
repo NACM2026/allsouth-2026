@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>All South Credit Conference 2026</title>
+<meta name="description" content="Agenda, attendee list, and notes for the 2026 All South Credit Conference.">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0d1620" media="(prefers-color-scheme: dark)">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="All South '26">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="assets/icon-180.png">
+<link rel="icon" href="assets/icon-180.png">
+<style>
+/* ---------- tokens ---------- */
+:root{
+  --navy:#013a66; --navy-2:#0a4d80; --blue:#2f76ad; --blue-soft:#e6f0f8;
+  --bg:#f4f6f9; --surface:#ffffff; --surface-2:#fafbfc;
+  --ink:#131a24; --ink-2:#4a5666; --ink-3:#7d8798;
+  --line:#e2e7ee; --line-2:#eef1f5;
+  --header-bg:#ffffff;
+  --gold:#c9a227; --green:#1c7a52; --amber:#b8730a;
+  --shadow:0 1px 2px rgba(16,40,74,.06), 0 8px 24px rgba(16,40,74,.07);
+  --shadow-lg:0 -4px 32px rgba(16,40,74,.18);
+  --r:14px; --r-sm:9px;
+  --safe-b:env(safe-area-inset-bottom, 0px);
+  --nav-h:calc(58px + var(--safe-b));
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --navy:#012c4f; --navy-2:#0a4d80; --blue:#68a6d4; --blue-soft:#12293d;
+    --bg:#0a1119; --surface:#131c26; --surface-2:#0f1720;
+    --ink:#eaeff6; --ink-2:#a8b4c4; --ink-3:#78859a;
+    --line:#243044; --line-2:#1c2636;
+    --header-bg:#0d1620;
+    --gold:#d9b747; --green:#4cbe8c; --amber:#e0a340;
+    --shadow:0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.35);
+    --shadow-lg:0 -4px 32px rgba(0,0,0,.5);
+  }
+}
+
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--bg); color:var(--ink);
+  font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  -webkit-font-smoothing:antialiased; -webkit-text-size-adjust:100%;
+  padding-bottom:var(--nav-h);
+  overscroll-behavior-y:none;
+}
+button{font:inherit;color:inherit;cursor:pointer}
+a{color:var(--blue)}
+
+/* ---------- header ---------- */
+header{
+  position:sticky; top:0; z-index:40;
+  background:var(--header-bg); color:var(--ink);
+  border-bottom:1px solid var(--line);
+  padding:calc(env(safe-area-inset-top,0px) + 13px) 16px 13px;
+  display:flex; align-items:center; gap:12px;
+}
+.wordmark{flex:1;min-width:0;display:flex;align-items:center}
+.wordmark img{height:38px;width:auto;max-width:100%;object-fit:contain;object-position:left center;display:block}
+.wordmark .dk{display:none}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]) .wordmark .lt{display:none}
+  :root:not([data-theme="light"]) .wordmark .dk{display:block}
+}
+.wordmark .fallback{font-size:17px;font-weight:750;letter-spacing:-.3px;color:var(--navy)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .wordmark .fallback{color:var(--blue)}}
+#installBtn{
+  display:none; border:1px solid var(--line); background:var(--surface-2);
+  color:var(--ink-2); border-radius:99px; padding:7px 13px; font-size:12.5px; font-weight:650;
+  white-space:nowrap;
+}
+
+/* ---------- views ---------- */
+.view{display:none;animation:fade .18s ease}
+.view.on{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(3px)}to{opacity:1;transform:none}}
+.pad{padding:16px}
+
+/* ---------- day pills ---------- */
+.daybar{
+  position:sticky; top:0; z-index:30; background:var(--surface);
+  border-bottom:1px solid var(--line); padding:10px 12px;
+  display:flex; gap:8px; overflow-x:auto; -webkit-overflow-scrolling:touch;
+}
+.daybar::-webkit-scrollbar{display:none}
+.pill{
+  border:1px solid var(--line); background:var(--surface-2); color:var(--ink-2);
+  border-radius:99px; padding:9px 16px; font-size:13.5px; font-weight:650;
+  white-space:nowrap; display:flex; flex-direction:column; align-items:center; line-height:1.2;
+}
+.pill small{font-size:10.5px;font-weight:600;opacity:.7;margin-top:2px}
+.pill.on{background:var(--navy);border-color:var(--navy);color:#fff}
+.pill.on small{opacity:.75}
+
+/* ---------- now banner ---------- */
+.nowbar{
+  margin:14px 16px 0; background:var(--blue-soft); border:1px solid color-mix(in srgb,var(--blue) 28%, transparent);
+  border-radius:var(--r); padding:12px 14px; display:none;
+}
+.nowbar.on{display:block}
+.nowbar .lbl{font-size:10.5px;font-weight:800;letter-spacing:1.3px;text-transform:uppercase;color:var(--blue)}
+.nowbar .ttl{font-weight:700;margin-top:4px;font-size:14.5px}
+.nowbar .mt{font-size:12.5px;color:var(--ink-2);margin-top:2px}
+
+/* ---------- agenda ---------- */
+.circuit{
+  margin:22px 16px 8px; font-size:10.5px; font-weight:800; letter-spacing:.9px;
+  text-transform:uppercase; color:var(--blue); display:flex; align-items:center; gap:9px;
+}
+.circuit > span:first-child{flex:0 1 auto}
+.circuit::after{content:"";flex:1;height:1px;background:var(--line)}
+.circuit .csp{display:flex;align-items:center;gap:6px;flex:0 0 auto;text-transform:none;letter-spacing:0}
+.circuit .csp img{height:auto;max-height:26px;max-width:86px;object-fit:contain}
+.circuit .csp b{font-size:11px;font-weight:700;color:var(--ink-2)}
+.spongrid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media (min-width:520px){.spongrid{grid-template-columns:repeat(3,1fr)}}
+.spongrid figure{margin:0;border:1px solid var(--line);border-radius:var(--r-sm);overflow:hidden;background:var(--surface-2)}
+.spongrid .mark{background:#fff;height:70px;display:flex;align-items:center;justify-content:center;padding:10px}
+.spongrid .mark img{max-width:100%;max-height:100%;object-fit:contain}
+.spongrid .mark span{font-size:11.5px;font-weight:700;text-align:center;color:#4a5666;line-height:1.3}
+.spongrid figcaption{font-size:10.5px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--ink-3);padding:7px 8px;text-align:center;border-top:1px solid var(--line)}
+.slot{padding:0 16px}
+.card{
+  display:flex; gap:12px; width:100%; text-align:left; background:var(--surface);
+  border:1px solid var(--line); border-radius:var(--r); padding:12px 13px;
+  margin-top:8px; box-shadow:var(--shadow); position:relative;
+  -webkit-tap-highlight-color:transparent;
+}
+.card.tap:active{transform:scale(.988)}
+.card.minor{background:var(--surface-2);box-shadow:none;padding:10px 13px;margin-top:6px}
+.card.live{border-color:var(--blue);box-shadow:0 0 0 2px color-mix(in srgb,var(--blue) 22%,transparent),var(--shadow)}
+.card.past{opacity:.55}
+.time{
+  flex:0 0 62px; font-size:12.5px; font-weight:750; color:var(--navy); line-height:1.35;
+  font-variant-numeric:tabular-nums;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .time{color:var(--blue)}}
+.time em{display:block;font-style:normal;font-weight:600;color:var(--ink-3);font-size:11.5px}
+.body{flex:1;min-width:0}
+.body h3{margin:0;font-size:14.5px;font-weight:700;line-height:1.35;letter-spacing:-.15px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.card.minor .body h3{font-size:13.5px;font-weight:650;color:var(--ink-2)}
+.body .who{margin:4px 0 0;font-size:12.5px;color:var(--ink-2);line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:7px;align-items:center}
+.card.minor .inlineroom{font-size:12px;color:var(--ink-3);font-weight:600;margin-top:2px;display:block}
+.tag{
+  font-size:10.5px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;
+  border-radius:5px;padding:3px 7px;background:var(--line-2);color:var(--ink-2);
+}
+.tag.room{background:var(--blue-soft);color:var(--blue)}
+.tag.key{background:color-mix(in srgb,var(--gold) 20%,transparent);color:var(--amber)}
+.tag.tba{background:color-mix(in srgb,var(--amber) 16%,transparent);color:var(--amber)}
+.tag.note{background:color-mix(in srgb,var(--green) 15%,transparent);color:var(--green)}
+.sponsorline{display:flex;align-items:center;gap:8px;margin-top:10px;padding-top:10px;border-top:1px solid var(--line-2)}
+.sponsorline span{font-size:10.5px;font-weight:700;letter-spacing:.7px;text-transform:uppercase;color:var(--ink-3);white-space:nowrap}
+.sponsorline b{font-size:12.5px;font-weight:700;line-height:1.25}
+.sponsorline img{height:auto;max-height:34px;width:auto;max-width:118px;object-fit:contain}
+.chev{align-self:center;color:var(--ink-3);flex:0 0 auto}
+.star{
+  position:absolute;top:8px;right:8px;width:34px;height:34px;border:0;background:none;
+  display:flex;align-items:center;justify-content:center;color:var(--ink-3);border-radius:99px;
+}
+.star.on{color:var(--gold)}
+.card.tap .body{padding-right:26px}
+
+/* ---------- search ---------- */
+.searchwrap{position:sticky;top:0;z-index:30;background:var(--surface);border-bottom:1px solid var(--line);padding:10px 12px}
+.search{
+  width:100%;border:1px solid var(--line);background:var(--surface-2);color:var(--ink);
+  border-radius:10px;padding:11px 13px;font-size:15px;
+}
+.search:focus{outline:2px solid color-mix(in srgb,var(--blue) 45%,transparent);outline-offset:-1px}
+.count{font-size:12px;color:var(--ink-3);margin:12px 16px 0;font-weight:600}
+
+/* ---------- people ---------- */
+.plist{padding:6px 16px 0}
+.prow{
+  display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:var(--surface);
+  border:1px solid var(--line);border-radius:var(--r);padding:12px 13px;margin-top:8px;
+  box-shadow:var(--shadow);-webkit-tap-highlight-color:transparent;
+}
+.prow:active{transform:scale(.988)}
+.av{
+  flex:0 0 40px;height:40px;border-radius:99px;background:var(--navy);color:#fff;
+  display:flex;align-items:center;justify-content:center;font-size:13.5px;font-weight:750;letter-spacing:.3px;
+}
+.pinfo{flex:1;min-width:0}
+.pinfo b{display:block;font-size:14.5px;font-weight:700;letter-spacing:-.1px}
+.pinfo span{display:block;font-size:12.5px;color:var(--ink-2);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dot{flex:0 0 8px;height:8px;border-radius:99px;background:var(--green)}
+.alpha{
+  margin:14px 16px 0;font-size:11px;font-weight:800;letter-spacing:1.5px;color:var(--ink-3);
+}
+
+/* ---------- empty / info blocks ---------- */
+.empty{
+  margin:16px;background:var(--surface);border:1px dashed var(--line);border-radius:var(--r);
+  padding:26px 20px;text-align:center;color:var(--ink-2);font-size:14px;
+}
+.empty b{display:block;color:var(--ink);font-size:15.5px;margin-bottom:6px}
+.block{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--r);
+  padding:16px;margin:14px 16px;box-shadow:var(--shadow);
+}
+.block h2{margin:0 0 12px;font-size:12px;font-weight:800;letter-spacing:1.4px;text-transform:uppercase;color:var(--ink-3)}
+.kv{display:flex;justify-content:space-between;gap:14px;padding:10px 0;border-top:1px solid var(--line-2);font-size:14px}
+.kv:first-of-type{border-top:0;padding-top:0}
+.kv dt{color:var(--ink-2);margin:0}
+.kv dd{margin:0;font-weight:700;text-align:right;word-break:break-word}
+.wifi{
+  background:var(--navy);color:#fff;border-radius:var(--r);padding:18px;margin:14px 16px;
+}
+.wifi h2{margin:0 0 14px;font-size:12px;font-weight:800;letter-spacing:1.4px;text-transform:uppercase;opacity:.66}
+.wifi .row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:11px 0;border-top:1px solid rgba(255,255,255,.14)}
+.wifi .row:first-of-type{border-top:0;padding-top:0}
+.wifi .row small{display:block;font-size:10.5px;letter-spacing:1.2px;text-transform:uppercase;opacity:.6;font-weight:700}
+.wifi .row code{font:600 16px/1.3 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.4px}
+.copy{border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.1);color:#fff;border-radius:8px;padding:7px 12px;font-size:12px;font-weight:650}
+.wifi .pending{font-size:13.5px;opacity:.8;line-height:1.55}
+.logogrid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media (min-width:520px){.logogrid{grid-template-columns:repeat(3,1fr)}}
+.logogrid div{
+  background:#fff;border:1px solid var(--line);border-radius:var(--r-sm);
+  height:74px;display:flex;align-items:center;justify-content:center;padding:11px;
+}
+.logogrid img{max-width:100%;max-height:100%;object-fit:contain}
+.upcoming{list-style:none;margin:0;padding:0}
+.upcoming li{display:flex;gap:12px;padding:9px 0;border-top:1px solid var(--line-2);font-size:14px}
+.upcoming li:first-child{border-top:0;padding-top:0}
+.upcoming b{flex:0 0 84px;color:var(--blue);font-weight:750;font-size:13px}
+.btnrow{display:flex;flex-direction:column;gap:8px;margin:14px 16px}
+.btn{
+  display:block;text-align:center;text-decoration:none;background:var(--navy);color:#fff;
+  border:0;border-radius:11px;padding:14px;font-size:14.5px;font-weight:700;
+}
+.btn.alt{background:var(--surface);color:var(--ink);border:1px solid var(--line)}
+.mapimg{width:100%;border-radius:var(--r-sm);border:1px solid var(--line);display:block}
+.foot{text-align:center;color:var(--ink-3);font-size:12px;padding:26px 24px 34px;line-height:1.7}
+
+/* ---------- notes tab ---------- */
+.nblock{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--r);
+  padding:14px;margin:10px 16px;box-shadow:var(--shadow);
+}
+.nblock .src{font-size:11px;font-weight:800;letter-spacing:1.1px;text-transform:uppercase;color:var(--blue)}
+.nblock h3{margin:5px 0 8px;font-size:14.5px;font-weight:700}
+.nblock p{margin:0;font-size:14px;color:var(--ink-2);white-space:pre-wrap;line-height:1.6}
+.privacy{
+  margin:14px 16px;font-size:12.5px;color:var(--ink-2);background:var(--blue-soft);
+  border-radius:var(--r-sm);padding:12px 14px;line-height:1.55;
+}
+
+/* ---------- bottom nav ---------- */
+nav{
+  position:fixed;bottom:0;left:0;right:0;z-index:50;
+  background:color-mix(in srgb,var(--surface) 92%, transparent);
+  backdrop-filter:saturate(180%) blur(14px);-webkit-backdrop-filter:saturate(180%) blur(14px);
+  border-top:1px solid var(--line);
+  display:grid;grid-template-columns:repeat(4,1fr);
+  padding-bottom:var(--safe-b);
+}
+nav button{
+  border:0;background:none;padding:8px 4px 7px;display:flex;flex-direction:column;
+  align-items:center;gap:3px;color:var(--ink-3);font-size:10.5px;font-weight:650;
+  -webkit-tap-highlight-color:transparent;
+}
+nav button.on{color:var(--blue)}
+nav svg{width:23px;height:23px}
+.badge{
+  position:absolute;transform:translate(15px,-4px);background:var(--blue);color:#fff;
+  border-radius:99px;min-width:16px;height:16px;font-size:10px;font-weight:800;
+  display:none;align-items:center;justify-content:center;padding:0 4px;
+}
+.badge.on{display:flex}
+
+/* ---------- sheet ---------- */
+.scrim{
+  position:fixed;inset:0;z-index:60;background:rgba(9,18,32,.5);
+  opacity:0;pointer-events:none;transition:opacity .22s ease;
+}
+.scrim.on{opacity:1;pointer-events:auto}
+.sheet{
+  position:fixed;left:0;right:0;bottom:0;z-index:61;background:var(--surface);
+  border-radius:20px 20px 0 0;box-shadow:var(--shadow-lg);
+  max-height:92vh;display:flex;flex-direction:column;
+  transform:translateY(100%);transition:transform .26s cubic-bezier(.32,.72,0,1);
+}
+.sheet.on{transform:none}
+.grab{padding:9px 0 3px;display:flex;justify-content:center;flex:0 0 auto}
+.grab i{width:40px;height:4px;border-radius:99px;background:var(--line);display:block}
+.sheet .top{
+  padding:6px 18px 14px;border-bottom:1px solid var(--line-2);flex:0 0 auto;
+  display:flex;gap:12px;align-items:flex-start;
+}
+.sheet .top h2{margin:0;font-size:19px;font-weight:750;letter-spacing:-.35px;line-height:1.28;flex:1}
+.sheet .top .x{
+  flex:0 0 32px;height:32px;border:0;border-radius:99px;background:var(--line-2);
+  color:var(--ink-2);display:flex;align-items:center;justify-content:center;font-size:19px;line-height:1;
+}
+.sheet .scroll{overflow-y:auto;-webkit-overflow-scrolling:touch;padding:16px 18px calc(24px + var(--safe-b))}
+.sheet .who2{font-size:14px;color:var(--ink-2);margin:0 0 14px;line-height:1.5;font-weight:600}
+.sheet .desc{font-size:14.5px;line-height:1.68;color:var(--ink-2);margin:0}
+.sheet .sponsorbox{
+  margin-top:18px;border:1px solid var(--line);border-radius:var(--r-sm);padding:14px;
+  text-align:center;background:#fff;
+}
+.sheet .sponsorbox small{display:block;font-size:10.5px;font-weight:800;letter-spacing:1.3px;text-transform:uppercase;color:var(--ink-3);margin-bottom:10px}
+.sheet .sponsorbox img{max-height:76px;max-width:200px;object-fit:contain}
+.notelabel{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  margin:22px 0 8px;font-size:11px;font-weight:800;letter-spacing:1.3px;text-transform:uppercase;color:var(--ink-3);
+}
+.notelabel em{font-style:normal;color:var(--green);font-weight:700;letter-spacing:.3px;text-transform:none;font-size:11.5px;opacity:0;transition:opacity .2s}
+.notelabel em.on{opacity:1}
+textarea{
+  width:100%;min-height:130px;resize:vertical;border:1px solid var(--line);
+  background:var(--surface-2);color:var(--ink);border-radius:11px;padding:13px;
+  font-family:inherit;font-size:15px;line-height:1.6;
+}
+textarea:focus{outline:2px solid color-mix(in srgb,var(--blue) 45%,transparent);outline-offset:-1px}
+.hint{font-size:12px;color:var(--ink-3);margin:8px 0 0;line-height:1.5}
+.linkrow{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.linkrow a{
+  text-decoration:none;background:var(--blue-soft);color:var(--blue);border-radius:8px;
+  padding:9px 13px;font-size:13px;font-weight:700;
+}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wordmark">
+    <img class="lt" src="assets/logo.png" alt="All South Credit Conference 2026"
+         onerror="this.replaceWith(Object.assign(document.createElement('span'),{textContent:'All South 2026',className:'fallback'}))">
+    <img class="dk" src="assets/logo-dark.png" alt="" aria-hidden="true" onerror="this.remove()">
+  </div>
+  <button id="installBtn" type="button">Install app</button>
+</header>
+
+<!-- ===================== AGENDA ===================== -->
+<section class="view on" id="view-agenda">
+  <div class="daybar" id="daybar"></div>
+  <div class="nowbar" id="nowbar"></div>
+  <div id="agenda"></div>
+  <p class="foot" id="agendaFoot"></p>
+</section>
+
+<!-- ===================== ATTENDEES ===================== -->
+<section class="view" id="view-people">
+  <div class="searchwrap">
+    <input class="search" id="psearch" type="search" placeholder="Search name, company, or title" autocomplete="off">
+  </div>
+  <div id="peopleBody"></div>
+</section>
+
+<!-- ===================== NOTES ===================== -->
+<section class="view" id="view-notes">
+  <div id="notesBody"></div>
+</section>
+
+<!-- ===================== INFO ===================== -->
+<section class="view" id="view-info">
+  <div id="infoBody"></div>
+</section>
+
+<!-- ===================== NAV ===================== -->
+<nav id="nav">
+  <button data-tab="agenda" class="on">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="4.5" width="18" height="16" rx="2.5"/><path d="M8 3v3M16 3v3M3 9.5h18"/></svg>
+    Agenda
+  </button>
+  <button data-tab="people">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="9" cy="8" r="3.4"/><path d="M2.8 20c.5-3.5 3.1-5.6 6.2-5.6s5.7 2.1 6.2 5.6"/><path d="M16.5 5.2a3.2 3.2 0 010 6M18.3 14.9c2 .7 3.3 2.5 3.6 5.1"/></svg>
+    Attendees
+  </button>
+  <button data-tab="notes">
+    <span class="badge" id="noteBadge"></span>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 3.8h14v16.4l-3.5-2.4-3.5 2.4-3.5-2.4L5 20.2z"/><path d="M9 8.5h6M9 12.2h4"/></svg>
+    My Notes
+  </button>
+  <button data-tab="info">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5.5M12 7.7v.3"/></svg>
+    Info
+  </button>
+</nav>
+
+<div class="scrim" id="scrim"></div>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-label="Details">
+  <div class="grab"><i></i></div>
+  <div class="top">
+    <h2 id="sheetTitle"></h2>
+    <button class="x" id="sheetClose" aria-label="Close">&times;</button>
+  </div>
+  <div class="scroll" id="sheetBody"></div>
+</div>
+
+<script src="data.js"></script>
+<script>
+/* ============================ storage ============================ */
+const NOTE_KEY = 'as26.notes.v1';
+const STAR_KEY = 'as26.stars.v1';
+
+function loadStore(k){
+  try{ return JSON.parse(localStorage.getItem(k) || '{}'); }
+  catch(e){ return {}; }
+}
+function saveStore(k, obj){
+  try{ localStorage.setItem(k, JSON.stringify(obj)); return true; }
+  catch(e){ return false; }
+}
+let NOTES = loadStore(NOTE_KEY);
+let STARS = loadStore(STAR_KEY);
+
+/* ============================ helpers ============================ */
+const $  = s => document.querySelector(s);
+const $$ = s => Array.from(document.querySelectorAll(s));
+const esc = s => String(s == null ? '' : s)
+  .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+  .replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+
+function slug(s){
+  return String(s).toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,60);
+}
+function fmt(hhmm){
+  if(!hhmm) return '';
+  const [H,M] = hhmm.split(':').map(Number);
+  const ap = H >= 12 ? 'pm' : 'am';
+  const h  = H % 12 === 0 ? 12 : H % 12;
+  return M === 0 ? h + ' ' + ap : h + ':' + String(M).padStart(2,'0') + ' ' + ap;
+}
+function range_(a,b){
+  const fa = fmt(a), fb = fmt(b);
+  const ma = fa.slice(-2), mb = fb.slice(-2);
+  return (ma === mb ? fa.slice(0,-3) : fa) + ' – ' + fb;
+}
+function mins(hhmm){
+  const [H,M] = String(hhmm).split(':').map(Number);
+  return H * 60 + M;
+}
+function initials(name){
+  const p = String(name).trim().split(/\s+/).filter(Boolean);
+  if(!p.length) return '?';
+  return (p[0][0] + (p.length > 1 ? p[p.length-1][0] : '')).toUpperCase();
+}
+function noteCount(){ return Object.values(NOTES).filter(v => v && v.trim()).length; }
+function refreshBadge(){
+  const n = noteCount(), b = $('#noteBadge');
+  b.textContent = n > 99 ? '99+' : n;
+  b.classList.toggle('on', n > 0);
+}
+
+/* Build a stable id for every agenda item, and a flat index. */
+const FLAT = [];
+CONFIG.days.forEach(d => {
+  (AGENDA[d.id] || []).forEach(it => {
+    it._day = d.id;
+    it._id  = d.id + '.' + it.start.replace(':','') + '.' + slug(it.title);
+    FLAG(it);
+    FLAT.push(it);
+  });
+});
+function FLAG(it){
+  it._clickable = !!(it.desc || it.sponsor);
+}
+
+/* ============================ tabs ============================ */
+let TAB = 'agenda';
+function setTab(t){
+  TAB = t;
+  $$('.view').forEach(v => v.classList.toggle('on', v.id === 'view-' + t));
+  $$('#nav button').forEach(b => b.classList.toggle('on', b.dataset.tab === t));
+  window.scrollTo(0,0);
+  if(t === 'notes') renderNotes();
+  if(t === 'people' && !ROSTER_TRIED) loadRoster();
+}
+$$('#nav button').forEach(b => b.addEventListener('click', () => setTab(b.dataset.tab)));
+
+/* ============================ sheet ============================ */
+let SHEET_SAVE_TIMER = null;
+function openSheet(title, html){
+  $('#sheetTitle').innerHTML = title;
+  $('#sheetBody').innerHTML  = html;
+  $('#sheet').classList.add('on');
+  $('#scrim').classList.add('on');
+  document.body.style.overflow = 'hidden';
+  const ta = $('#sheetBody textarea');
+  if(ta){
+    const key = ta.dataset.key;
+    ta.addEventListener('input', () => {
+      NOTES[key] = ta.value;
+      saveStore(NOTE_KEY, NOTES);
+      refreshBadge();
+      const flag = $('#saveFlag');
+      if(flag){
+        flag.classList.add('on');
+        clearTimeout(SHEET_SAVE_TIMER);
+        SHEET_SAVE_TIMER = setTimeout(() => flag.classList.remove('on'), 1400);
+      }
+    });
+  }
+}
+function closeSheet(){
+  $('#sheet').classList.remove('on');
+  $('#scrim').classList.remove('on');
+  document.body.style.overflow = '';
+  if(TAB === 'agenda')  renderAgenda();
+  if(TAB === 'people')  renderPeople();
+  if(TAB === 'notes')   renderNotes();
+}
+$('#scrim').addEventListener('click', closeSheet);
+$('#sheetClose').addEventListener('click', closeSheet);
+document.addEventListener('keydown', e => { if(e.key === 'Escape') closeSheet(); });
+
+function noteField(key, label, hint){
+  const v = NOTES[key] || '';
+  return '<div class="notelabel"><span>' + label + '</span><em id="saveFlag">Saved</em></div>'
+    + '<textarea data-key="' + esc(key) + '" placeholder="Type here…">' + esc(v) + '</textarea>'
+    + '<p class="hint">' + hint + '</p>';
+}
+
+/* ============================ agenda ============================ */
+let DAY = null;
+
+function currentDayId(){
+  const today = new Date();
+  const y = today.getFullYear(), m = String(today.getMonth()+1).padStart(2,'0'), d = String(today.getDate()).padStart(2,'0');
+  const iso = y + '-' + m + '-' + d;
+  const hit = CONFIG.days.find(x => x.date === iso);
+  if(hit) return hit.id;
+  const first = CONFIG.days[0], last = CONFIG.days[CONFIG.days.length-1];
+  if(iso < first.date) return first.id;
+  if(iso > last.date)  return last.id;
+  return first.id;
+}
+
+function nowState(){
+  const today = new Date();
+  const iso = today.getFullYear() + '-' + String(today.getMonth()+1).padStart(2,'0') + '-' + String(today.getDate()).padStart(2,'0');
+  const day = CONFIG.days.find(x => x.date === iso);
+  if(!day) return null;
+  return { day: day.id, m: today.getHours()*60 + today.getMinutes() };
+}
+
+function renderDaybar(){
+  $('#daybar').innerHTML = CONFIG.days.map(d => {
+    const dt = new Date(d.date + 'T12:00:00');
+    return '<button class="pill' + (d.id === DAY ? ' on' : '') + '" data-day="' + d.id + '">'
+      + esc(d.label) + '<small>Sept ' + dt.getDate() + '</small></button>';
+  }).join('');
+  $$('#daybar .pill').forEach(b => b.addEventListener('click', () => {
+    DAY = b.dataset.day; renderDaybar(); renderAgenda(); window.scrollTo(0,0);
+  }));
+}
+
+function renderNowbar(){
+  const bar = $('#nowbar'), st = nowState();
+  if(!st){ bar.classList.remove('on'); return; }
+  const items = (AGENDA[st.day] || []).filter(i => i.kind !== 'logistics');
+  const live  = items.filter(i => mins(i.start) <= st.m && st.m < mins(i.end));
+  const next  = items.filter(i => mins(i.start) > st.m).sort((a,b) => mins(a.start) - mins(b.start));
+  let lbl, list;
+  if(live.length){ lbl = 'Happening now'; list = live; }
+  else if(next.length){ lbl = 'Up next'; list = [next[0]].concat(next.filter(i => i.start === next[0].start).slice(1)); }
+  else { bar.classList.remove('on'); return; }
+  bar.innerHTML = '<div class="lbl">' + lbl + '</div>'
+    + list.map(i => '<div class="ttl">' + esc(i.title) + '</div>'
+        + '<div class="mt">' + fmt(i.start) + ' – ' + fmt(i.end) + (i.room ? ' · ' + esc(i.room) : '') + '</div>').join('');
+  bar.classList.add('on');
+}
+
+function renderAgenda(){
+  const st = nowState();
+  const rank = k => (k === 'logistics' ? 3 : k === 'break' ? 2 : 0);
+  const items = (AGENDA[DAY] || []).slice().sort((a,b) =>
+    mins(a.start) - mins(b.start)
+    || rank(a.kind) - rank(b.kind)
+    || String(a.room).localeCompare(String(b.room)));
+  let html = '', circuit = null;
+
+  items.forEach(it => {
+    if(it.circuit && it.circuit !== circuit){
+      circuit = it.circuit;
+      const cs = (typeof CIRCUIT_SPONSORS !== 'undefined') ? CIRCUIT_SPONSORS[it.circuit] : null;
+      html += '<div class="circuit"><span>' + esc(it.circuit) + ' · ' + range_(it.start, it.end) + '</span>'
+        + (cs ? '<span class="csp"><img src="' + esc(cs.logo) + '" alt="' + esc(cs.name) + '"'
+            + ' onerror="this.replaceWith(Object.assign(document.createElement(\'b\'),{textContent:this.alt}))"></span>' : '')
+        + '</div>';
+    }
+    if(!it.circuit) circuit = null;
+
+    const minor = (it.kind === 'break' || it.kind === 'logistics');
+    const live  = st && st.day === DAY && mins(it.start) <= st.m && st.m < mins(it.end);
+    const past  = st && st.day === DAY && st.m >= mins(it.end);
+    const hasNote = !!(NOTES['s:' + it._id] || '').trim();
+    const starred = !!STARS[it._id];
+
+    const cls = ['card', minor ? 'minor' : '', it._clickable ? 'tap' : '', live ? 'live' : '', (past && !live) ? 'past' : ''].filter(Boolean).join(' ');
+    const tags = [];
+    if(it.room && !minor)   tags.push('<span class="tag room">' + esc(it.room) + '</span>');
+    if(it.kind === 'keynote') tags.push('<span class="tag key">Keynote</span>');
+    if(it.tba)              tags.push('<span class="tag tba">Details coming</span>');
+    if(hasNote)             tags.push('<span class="tag note">Note</span>');
+
+    const inner =
+      '<div class="time">' + fmt(it.start) + '<em>' + fmt(it.end) + '</em></div>'
+      + '<div class="body">'
+        + '<h3>' + esc(it.short || it.title) + '</h3>'
+        + (minor && it.room ? '<span class="inlineroom">' + esc(it.room) + '</span>' : '')
+        + (it.speaker ? '<p class="who">' + esc(it.speaker) + '</p>' : '')
+        + (tags.length ? '<div class="meta">' + tags.join('') + '</div>' : '')
+        + (it.sponsor ? '<div class="sponsorline"><span>Sponsored by</span><img src="' + esc(it.sponsor.logo) + '" alt="' + esc(it.sponsor.name) + '" onerror="this.replaceWith(Object.assign(document.createElement(\'b\'),{textContent:this.alt}))"></div>' : '')
+      + '</div>'
+      + (it._clickable ? '<svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 5l7 7-7 7"/></svg>' : '');
+
+    if(it._clickable){
+      html += '<div class="slot"><button class="' + cls + '" data-open="' + esc(it._id) + '">' + inner
+        + '<span class="star' + (starred ? ' on' : '') + '" data-star="' + esc(it._id) + '" role="button" aria-label="Save to my schedule">'
+        + (starred
+          ? '<svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.6l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 17.4 6.2 20.5l1.1-6.5L2.6 9.4l6.5-.9z"/></svg>'
+          : '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M12 2.6l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 17.4 6.2 20.5l1.1-6.5L2.6 9.4l6.5-.9z"/></svg>')
+        + '</span></button></div>';
+    } else {
+      html += '<div class="slot"><div class="' + cls + '">' + inner + '</div></div>';
+    }
+  });
+
+  $('#agenda').innerHTML = html || '<div class="empty">Nothing scheduled for this day yet.</div>';
+
+  $$('#agenda [data-open]').forEach(b => b.addEventListener('click', e => {
+    if(e.target.closest('[data-star]')) return;
+    openSession(b.dataset.open);
+  }));
+  $$('#agenda [data-star]').forEach(s => s.addEventListener('click', e => {
+    e.stopPropagation(); e.preventDefault();
+    const id = s.dataset.star;
+    if(STARS[id]) delete STARS[id]; else STARS[id] = 1;
+    saveStore(STAR_KEY, STARS);
+    renderAgenda();
+  }));
+
+  renderNowbar();
+}
+
+function openSession(id){
+  const it = FLAT.find(x => x._id === id);
+  if(!it) return;
+  const day = CONFIG.days.find(d => d.id === it._day);
+  const bits = [day ? day.long : '', fmt(it.start) + ' – ' + fmt(it.end), it.room || ''].filter(Boolean).join('  ·  ');
+  let html = '<p class="who2">' + esc(bits) + (it.speaker ? '<br>' + esc(it.speaker) : '') + '</p>';
+  if(it.desc) html += '<p class="desc">' + esc(it.desc) + '</p>';
+  const csp = (it.circuit && typeof CIRCUIT_SPONSORS !== 'undefined') ? CIRCUIT_SPONSORS[it.circuit] : null;
+  const shown = it.sponsor || csp;
+  if(shown){
+    const lbl = it.sponsor ? 'Sponsored by' : esc(it.circuit) + ' sponsored by';
+    html += '<div class="sponsorbox"><small>' + lbl + '</small>'
+      + '<img src="' + esc(shown.logo) + '" alt="' + esc(shown.name) + '"'
+      + ' onerror="this.replaceWith(Object.assign(document.createElement(\'b\'),{textContent:this.alt}))"></div>';
+  }
+  html += noteField('s:' + it._id, 'My notes on this session',
+    'Saves automatically on this device. Nobody else can see it.');
+  openSheet(esc(it.title), html);
+}
+
+/* ============================ roster ============================ */
+let ROSTER = [];
+let ROSTER_TRIED = false;
+let ROSTER_STATE = 'idle';   // idle | loading | ok | empty | error | unset
+
+const ROSTER_CACHE = 'as26.roster.v1';
+
+function parseCSV(text){
+  const rows = [];
+  let row = [], cell = '', q = false;
+  text = text.replace(/^﻿/, '').replace(/\r\n/g,'\n').replace(/\r/g,'\n');
+  for(let i = 0; i < text.length; i++){
+    const c = text[i];
+    if(q){
+      if(c === '"'){
+        if(text[i+1] === '"'){ cell += '"'; i++; }
+        else q = false;
+      } else cell += c;
+    } else {
+      if(c === '"') q = true;
+      else if(c === ','){ row.push(cell); cell = ''; }
+      else if(c === '\n'){ row.push(cell); rows.push(row); row = []; cell = ''; }
+      else cell += c;
+    }
+  }
+  if(cell !== '' || row.length){ row.push(cell); rows.push(row); }
+  return rows.filter(r => r.some(v => String(v).trim() !== ''));
+}
+
+function mapRoster(rows){
+  if(!rows.length) return [];
+  const head = rows[0].map(h => String(h).trim().toLowerCase());
+  const find = (...names) => {
+    for(const n of names){ const i = head.indexOf(n); if(i !== -1) return i; }
+    return -1;
+  };
+  const iName  = find('name','attendee','full name','attendee name');
+  const iFirst = find('first','first name','firstname');
+  const iLast  = find('last','last name','lastname');
+  const iTitle = find('title','job title','position');
+  const iComp  = find('company','organization','employer','company name');
+  const iCity  = find('city','location','city, state','city/state');
+  const iMail  = find('email','e-mail','email address');
+  const iGroup = find('group','industry','industry group','type');
+
+  return rows.slice(1).map(r => {
+    const get = i => (i >= 0 && r[i] != null) ? String(r[i]).trim() : '';
+    let name = get(iName);
+    if(!name) name = [get(iFirst), get(iLast)].filter(Boolean).join(' ');
+    if(!name) return null;
+    return {
+      name, title: get(iTitle), company: get(iComp),
+      city: get(iCity), email: get(iMail), group: get(iGroup),
+      id: slug(name + '-' + get(iComp))
+    };
+  }).filter(Boolean).sort((a,b) => {
+    const la = a.name.trim().split(/\s+/).pop().toLowerCase();
+    const lb = b.name.trim().split(/\s+/).pop().toLowerCase();
+    return la.localeCompare(lb) || a.name.localeCompare(b.name);
+  });
+}
+
+async function loadRoster(){
+  ROSTER_TRIED = true;
+  if(!CONFIG.rosterCsvUrl){ ROSTER_STATE = 'unset'; renderPeople(); return; }
+
+  try{ const c = localStorage.getItem(ROSTER_CACHE); if(c){ ROSTER = JSON.parse(c); ROSTER_STATE = ROSTER.length ? 'ok' : 'idle'; } }catch(e){}
+
+  ROSTER_STATE = ROSTER.length ? 'ok' : 'loading';
+  renderPeople();
+
+  try{
+    const url = CONFIG.rosterCsvUrl + (CONFIG.rosterCsvUrl.includes('?') ? '&' : '?') + 'cb=' + Date.now();
+    const res = await fetch(url, { cache:'no-store' });
+    if(!res.ok) throw new Error('HTTP ' + res.status);
+    const list = mapRoster(parseCSV(await res.text()));
+    ROSTER = list;
+    ROSTER_STATE = list.length ? 'ok' : 'empty';
+    try{ localStorage.setItem(ROSTER_CACHE, JSON.stringify(list)); }catch(e){}
+  }catch(err){
+    if(!ROSTER.length) ROSTER_STATE = 'error';
+  }
+  renderPeople();
+}
+
+function renderPeople(){
+  const q = ($('#psearch').value || '').trim().toLowerCase();
+  const box = $('#peopleBody');
+
+  if(ROSTER_STATE === 'unset'){
+    box.innerHTML = '<div class="empty"><b>Attendee list posts soon</b>The live roster turns on a few days before the conference. Check back — or refresh this page once you hear from us.</div>';
+    return;
+  }
+  if(ROSTER_STATE === 'loading'){
+    box.innerHTML = '<div class="empty">Loading the attendee list…</div>';
+    return;
+  }
+  if(ROSTER_STATE === 'error'){
+    box.innerHTML = '<div class="empty"><b>Couldn\'t load the attendee list</b>Check your connection and pull down to refresh. If you\'re on hotel wifi, it may just be slow.</div>';
+    return;
+  }
+  if(ROSTER_STATE === 'empty'){
+    box.innerHTML = '<div class="empty"><b>No attendees listed yet</b>The roster is connected but empty right now.</div>';
+    return;
+  }
+
+  const list = q ? ROSTER.filter(p =>
+    (p.name + ' ' + p.company + ' ' + p.title + ' ' + p.city + ' ' + p.group).toLowerCase().includes(q)) : ROSTER;
+
+  if(!list.length){
+    box.innerHTML = '<div class="empty">No match for “' + esc(q) + '”.</div>';
+    return;
+  }
+
+  let html = '<p class="count">' + list.length + (list.length === 1 ? ' attendee' : ' attendees')
+    + (q ? ' matching' : ' registered') + '</p><div class="plist">';
+  let letter = null;
+  list.forEach(p => {
+    const L = (p.name.trim().split(/\s+/).pop()[0] || '#').toUpperCase();
+    if(!q && L !== letter){ letter = L; html += '</div><div class="alpha">' + esc(L) + '</div><div class="plist">'; }
+    const hasNote = !!(NOTES['p:' + p.id] || '').trim();
+    html += '<button class="prow" data-person="' + esc(p.id) + '">'
+      + '<span class="av">' + esc(initials(p.name)) + '</span>'
+      + '<span class="pinfo"><b>' + esc(p.name) + '</b><span>'
+        + esc([p.title, p.company].filter(Boolean).join(' · ') || p.city || '&nbsp;') + '</span></span>'
+      + (hasNote ? '<span class="dot" title="You have a note"></span>' : '')
+      + '<svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 5l7 7-7 7"/></svg>'
+      + '</button>';
+  });
+  html += '</div><p class="foot">Roster updates automatically. Pull to refresh if you just registered.</p>';
+  box.innerHTML = html;
+
+  $$('#peopleBody [data-person]').forEach(b => b.addEventListener('click', () => openPerson(b.dataset.person)));
+}
+
+$('#psearch').addEventListener('input', renderPeople);
+
+function openPerson(id){
+  const p = ROSTER.find(x => x.id === id);
+  if(!p) return;
+  const lines = [p.title, p.company, p.city].filter(Boolean).join('<br>');
+  let html = lines ? '<p class="who2">' + lines + '</p>' : '';
+  if(p.group) html += '<div class="meta" style="margin:0 0 14px"><span class="tag">' + esc(p.group) + '</span></div>';
+  if(p.email){
+    html += '<div class="linkrow"><a href="mailto:' + esc(p.email) + '">Email ' + esc(p.name.split(' ')[0]) + '</a>'
+      + '<a href="https://www.linkedin.com/search/results/people/?keywords=' + encodeURIComponent(p.name + ' ' + (p.company||'')) + '" target="_blank" rel="noopener">Find on LinkedIn</a></div>';
+  } else {
+    html += '<div class="linkrow"><a href="https://www.linkedin.com/search/results/people/?keywords=' + encodeURIComponent(p.name + ' ' + (p.company||'')) + '" target="_blank" rel="noopener">Find on LinkedIn</a></div>';
+  }
+  html += noteField('p:' + p.id, 'My notes on ' + esc(p.name.split(' ')[0]),
+    'Follow-ups, what you talked about, next steps. Saves automatically on this device — nobody else can see it.');
+  openSheet(esc(p.name), html);
+}
+
+/* ============================ notes tab ============================ */
+function allNotes(){
+  const out = [];
+  Object.keys(NOTES).forEach(k => {
+    const v = (NOTES[k] || '').trim();
+    if(!v) return;
+    if(k.startsWith('s:')){
+      const it = FLAT.find(x => x._id === k.slice(2));
+      const day = it ? CONFIG.days.find(d => d.id === it._day) : null;
+      out.push({
+        key:k, kind:'Session',
+        title: it ? it.title : 'Session',
+        sub: it ? ((day ? day.label + ' ' : '') + fmt(it.start) + (it.room ? ' · ' + it.room : '')) : '',
+        text:v, sort: it ? (CONFIG.days.findIndex(d=>d.id===it._day)*10000 + mins(it.start)) : 99999
+      });
+    } else if(k.startsWith('p:')){
+      const p = ROSTER.find(x => x.id === k.slice(2));
+      out.push({
+        key:k, kind:'Attendee',
+        title: p ? p.name : k.slice(2).replace(/-/g,' ').replace(/\b\w/g, c => c.toUpperCase()),
+        sub: p ? [p.title, p.company].filter(Boolean).join(' · ') : '',
+        text:v, sort: 100000
+      });
+    }
+  });
+  return out.sort((a,b) => a.sort - b.sort || a.title.localeCompare(b.title));
+}
+
+function notesAsText(){
+  const n = allNotes();
+  let out = 'All South Credit Conference 2026 — My Notes\n' + new Date().toLocaleString() + '\n';
+  ['Session','Attendee'].forEach(k => {
+    const g = n.filter(x => x.kind === k);
+    if(!g.length) return;
+    out += '\n\n=== ' + k.toUpperCase() + ' NOTES ===\n';
+    g.forEach(x => {
+      out += '\n' + x.title + (x.sub ? '\n' + x.sub : '') + '\n' + x.text + '\n' + '-'.repeat(40) + '\n';
+    });
+  });
+  return out;
+}
+
+function renderNotes(){
+  const n = allNotes(), box = $('#notesBody');
+  const starred = FLAT.filter(x => STARS[x._id]);
+
+  let html = '';
+
+  if(starred.length){
+    html += '<div class="block"><h2>My schedule (' + starred.length + ')</h2>';
+    html += starred.sort((a,b) => CONFIG.days.findIndex(d=>d.id===a._day) - CONFIG.days.findIndex(d=>d.id===b._day) || mins(a.start)-mins(b.start))
+      .map(it => {
+        const day = CONFIG.days.find(d => d.id === it._day);
+        return '<div class="kv"><dt style="flex:1">' + esc(it.title) + '</dt>'
+          + '<dd style="white-space:nowrap;font-size:12.5px;color:var(--ink-2)">' + (day ? esc(day.label) + ' ' : '') + fmt(it.start) + '</dd></div>';
+      }).join('');
+    html += '</div>';
+  }
+
+  if(!n.length){
+    html += '<div class="empty"><b>No notes yet</b>Tap any session or attendee and use the notes box. Everything you write stays on this device.</div>';
+  } else {
+    html += '<div class="btnrow"><button class="btn" id="copyNotes">Copy all notes</button>'
+      + '<button class="btn alt" id="dlNotes">Download as text file</button>'
+      + (CONFIG.supportEmail ? '<a class="btn alt" id="mailNotes" href="#">Email notes to myself</a>' : '')
+      + '</div>';
+    html += n.map(x =>
+      '<div class="nblock"><div class="src">' + esc(x.kind) + '</div>'
+      + '<h3>' + esc(x.title) + '</h3>'
+      + (x.sub ? '<p style="font-size:12.5px;color:var(--ink-3);margin:-4px 0 8px">' + esc(x.sub) + '</p>' : '')
+      + '<p>' + esc(x.text) + '</p></div>').join('');
+  }
+
+  html += '<div class="privacy"><b>Where your notes live:</b> in this browser on this device only. '
+    + 'They are never uploaded, and nobody at NACM can see them. Clearing your browser data or switching '
+    + 'phones will lose them — use “Copy all notes” or “Download” to keep a copy before you head home.</div>';
+
+  box.innerHTML = html;
+
+  const cp = $('#copyNotes');
+  if(cp) cp.addEventListener('click', async () => {
+    const txt = notesAsText();
+    try{ await navigator.clipboard.writeText(txt); cp.textContent = 'Copied ✓'; }
+    catch(e){ cp.textContent = 'Press and hold to copy below'; alert(txt); }
+    setTimeout(() => cp.textContent = 'Copy all notes', 1800);
+  });
+  const dl = $('#dlNotes');
+  if(dl) dl.addEventListener('click', () => {
+    const blob = new Blob([notesAsText()], { type:'text/plain' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'all-south-2026-notes.txt';
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+  });
+  const ml = $('#mailNotes');
+  if(ml) ml.addEventListener('click', e => {
+    e.preventDefault();
+    const body = notesAsText().slice(0, 1800);
+    window.location.href = 'mailto:?subject=' + encodeURIComponent('My All South 2026 notes')
+      + '&body=' + encodeURIComponent(body);
+  });
+}
+
+/* ============================ info tab ============================ */
+function renderInfo(){
+  const w = CONFIG.wifi || {};
+  let html = '';
+
+  /* wifi */
+  html += '<div class="wifi"><h2>Hotel Wi‑Fi</h2>';
+  if(w.network || w.password){
+    if(w.network) html += '<div class="row"><div><small>Network</small><code id="wnet">' + esc(w.network) + '</code></div>'
+      + '<button class="copy" data-copy="' + esc(w.network) + '">Copy</button></div>';
+    if(w.password) html += '<div class="row"><div><small>Password</small><code id="wpw">' + esc(w.password) + '</code></div>'
+      + '<button class="copy" data-copy="' + esc(w.password) + '">Copy</button></div>';
+    if(w.note) html += '<div class="row"><div class="pending">' + esc(w.note) + '</div></div>';
+  } else {
+    html += '<p class="pending">The hotel hasn\'t released the conference network details yet. '
+      + 'They\'ll appear here as soon as we have them — and on signage at the registration table.</p>';
+  }
+  html += '</div>';
+
+  /* venue */
+  const rows = [];
+  if(CONFIG.venue)        rows.push(['Venue', CONFIG.venue]);
+  if(CONFIG.venueAddress) rows.push(['Address', CONFIG.venueAddress]);
+  rows.push(['Dates', 'September 23–25, 2026']);
+  if(CONFIG.supportPhone) rows.push(['Questions', CONFIG.supportPhone]);
+  html += '<div class="block"><h2>Venue</h2><dl style="margin:0">'
+    + rows.map(r => '<div class="kv"><dt>' + esc(r[0]) + '</dt><dd>' + esc(r[1]) + '</dd></div>').join('')
+    + '</dl></div>';
+
+  /* hotel map */
+  if(CONFIG.hotelMapImage){
+    html += '<div class="block" id="mapBlock" style="display:none"><h2>Hotel Map</h2>'
+      + '<a id="mapLink" href="' + esc(CONFIG.hotelMapImage) + '" target="_blank" rel="noopener">'
+      + '<img class="mapimg" id="mapImg" src="' + esc(CONFIG.hotelMapImage) + '" alt="Hotel floor plan"></a>'
+      + '<p class="hint">Tap to open full size.</p></div>';
+  }
+
+  /* buttons */
+  const btns = [];
+  if(CONFIG.venueMapsUrl)  btns.push(['Directions to the hotel', CONFIG.venueMapsUrl, '']);
+  if(CONFIG.programPdfUrl) btns.push(['Full PDF program', CONFIG.programPdfUrl, 'alt']);
+  if(CONFIG.surveyUrl)     btns.push(['Conference feedback survey', CONFIG.surveyUrl, 'alt']);
+  if(CONFIG.websiteUrl)    btns.push(['nacmsw.com', CONFIG.websiteUrl, 'alt']);
+  if(btns.length){
+    html += '<div class="btnrow">' + btns.map(b =>
+      '<a class="btn ' + b[2] + '" href="' + esc(b[1]) + '" target="_blank" rel="noopener">' + esc(b[0]) + '</a>').join('') + '</div>';
+  }
+
+  /* sponsors */
+  if(typeof SPONSORS !== 'undefined' && SPONSORS.length){
+    html += '<div class="block"><h2>Thank you to our sponsors</h2><div class="spongrid">'
+      + SPONSORS.map(x =>
+          '<figure><div class="mark"><img src="' + esc(x.logo) + '" alt="' + esc(x.name) + '" loading="lazy"'
+          + ' onerror="this.replaceWith(Object.assign(document.createElement(\'span\'),{textContent:this.alt}))"></div>'
+          + '<figcaption>' + esc(x.item) + '</figcaption></figure>').join('')
+      + '</div></div>';
+  }
+
+  /* exhibitors */
+  if(typeof EXHIBITORS !== 'undefined' && EXHIBITORS.length){
+    html += '<div class="block"><h2>Thank you to our exhibitors</h2><div class="logogrid">'
+      + EXHIBITORS.map(x => '<div><img src="' + esc(x.logo) + '" alt="' + esc(x.name) + '" loading="lazy"'
+        + ' onerror="this.replaceWith(Object.assign(document.createElement(\'span\'),{textContent:this.alt,style:\'font-size:12px;font-weight:700;text-align:center;color:#4a5666\'}))"></div>').join('')
+      + '</div><p class="hint">Stop by the booths in the Statler Foyer — and get your passport stamped.</p></div>';
+  }
+
+  /* upcoming */
+  if(typeof UPCOMING !== 'undefined' && UPCOMING.length){
+    html += '<div class="block"><h2>Save the date</h2><ul class="upcoming">'
+      + UPCOMING.map(u => '<li><b>' + esc(u.date) + '</b><span>' + esc(u.title) + '</span></li>').join('')
+      + '</ul><p class="hint">Register at nacmsw.com</p></div>';
+  }
+
+  html += '<p class="foot">All South Credit Conference 2026<br>Presented by NACM Southwest'
+    + (CONFIG.supportEmail ? '<br><a href="mailto:' + esc(CONFIG.supportEmail) + '">' + esc(CONFIG.supportEmail) + '</a>' : '')
+    + '</p>';
+
+  $('#infoBody').innerHTML = html;
+
+  $$('#infoBody .copy').forEach(b => b.addEventListener('click', async () => {
+    try{ await navigator.clipboard.writeText(b.dataset.copy); b.textContent = 'Copied ✓'; }
+    catch(e){ b.textContent = 'Select it above'; }
+    setTimeout(() => b.textContent = 'Copy', 1600);
+  }));
+
+  const mi = $('#mapImg');
+  if(mi){
+    mi.addEventListener('load', () => $('#mapBlock').style.display = '');
+    mi.addEventListener('error', () => { const b = $('#mapBlock'); if(b) b.remove(); });
+    if(mi.complete && mi.naturalWidth) $('#mapBlock').style.display = '';
+  }
+}
+
+/* ============================ install prompt ============================ */
+let deferredPrompt = null;
+window.addEventListener('beforeinstallprompt', e => {
+  e.preventDefault(); deferredPrompt = e;
+  $('#installBtn').style.display = 'block';
+});
+$('#installBtn').addEventListener('click', async () => {
+  if(!deferredPrompt) return;
+  deferredPrompt.prompt();
+  await deferredPrompt.userChoice;
+  deferredPrompt = null;
+  $('#installBtn').style.display = 'none';
+});
+
+/* ============================ boot ============================ */
+DAY = currentDayId();
+renderDaybar();
+renderAgenda();
+renderInfo();
+refreshBadge();
+$('#agendaFoot').innerHTML = 'Tap a session for the full description.<br>Tap the star to build your own schedule.';
+
+setInterval(() => { renderNowbar(); if(TAB === 'agenda') renderAgenda(); }, 60000);
+
+if('serviceWorker' in navigator){
+  window.addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {}));
+}
+</script>
+</body>
+</html>
