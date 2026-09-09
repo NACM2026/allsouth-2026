@@ -33,9 +33,9 @@ const CONFIG = {
   supportPhone: "972-536-0400",
 
   // ---- HOTEL MAP -----------------------------------------------------------
-  // Drop an image at assets/hotel-map.png (or .jpg and change this).
+  // Drop hotel-map.png at the top level of the repo (or .jpg and change this).
   // If the file isn't there, the section hides itself automatically.
-  hotelMapImage: "assets/hotel-map.png",
+  hotelMapImage: "hotel-map.png",
 
   // Conference dates used for the "Happening now" indicator (local time)
   days: [

@@ -11,7 +11,9 @@
 <meta name="apple-mobile-web-app-title" content="All South '26">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="assets/icon-180.png">
+<link rel="apple-touch-icon" href="icon-180.png">
 <link rel="icon" href="assets/icon-180.png">
+<link rel="icon" href="icon-180.png">
 <style>
 /* ---------- tokens ----------
    The app is locked to the light theme via data-theme="light" on <html>.
@@ -354,9 +356,10 @@ textarea:focus{outline:2px solid color-mix(in srgb,var(--blue) 45%,transparent);
 
 <header>
   <div class="wordmark">
-    <img class="lt" src="assets/logo.png" alt="All South Credit Conference 2026"
-         onerror="this.replaceWith(Object.assign(document.createElement('span'),{textContent:'All South 2026',className:'fallback'}))">
-    <img class="dk" src="assets/logo-dark.png" alt="" aria-hidden="true" onerror="this.remove()">
+    <img class="lt" data-src="assets/logo.png" alt="All South 2026"
+         data-fbclass="fallback" onerror="imgFallback(this)">
+    <img class="dk" data-src="assets/logo-dark.png" alt="" aria-hidden="true"
+         data-nofallback="1" onerror="imgFallback(this)">
   </div>
   <button id="installBtn" type="button">Install app</button>
 </header>
@@ -418,6 +421,7 @@ textarea:focus{outline:2px solid color-mix(in srgb,var(--blue) 45%,transparent);
   <div class="scroll" id="sheetBody"></div>
 </div>
 
+<script src="logos.js"></script>
 <script src="data.js"></script>
 <script>
 /* ============================ storage ============================ */
@@ -466,6 +470,33 @@ function initials(name){
   if(!p.length) return '?';
   return (p[0][0] + (p.length > 1 ? p[p.length-1][0] : '')).toUpperCase();
 }
+/* Images are referenced as assets/logos/x.png. If that 404s — e.g. GitHub's web
+   uploader flattened the folders and everything landed at the repo root — retry
+   the same filename at the root before giving up and showing the sponsor's name. */
+/* Every image is embedded in logos.js as a data URI, keyed by the filename
+   without its extension. resolveLogo() turns the friendly path written in
+   data.js ("assets/logos/uta.png") into that data URI, so nothing is fetched
+   from disk and there is no assets/ folder to upload. If a key is missing the
+   original path is returned and the fallback below still runs. */
+function resolveLogo(path){
+  if(!path) return '';
+  if(/^data:/.test(path)) return path;
+  if(typeof LOGOS === 'undefined') return path;
+  const key = String(path).split('/').pop().replace(/\.(png|jpe?g|gif|svg|webp)$/i,'');
+  return LOGOS[key] || path;
+}
+function imgFallback(img){
+  if(!img.dataset.retried){
+    const flat = img.src.replace(/\/assets\/(?:logos\/)?/, '/');
+    if(flat !== img.src){ img.dataset.retried = '1'; img.src = flat; return; }
+    img.dataset.retried = '1';
+  }
+  if(img.dataset.nofallback === '1'){ img.remove(); return; }
+  const b = document.createElement('b');
+  b.textContent = img.alt || '';
+  if(img.dataset.fbclass) b.className = img.dataset.fbclass;
+  img.replaceWith(b);
+}
 function sponsorOf(it){
   if(!it) return null;
   if(it.sponsor) return it.sponsor;
@@ -474,8 +505,8 @@ function sponsorOf(it){
 }
 function sponsorMark(sp, cls){
   if(!sp) return '';
-  return '<img class="' + cls + '" src="' + esc(sp.logo) + '" alt="' + esc(sp.name) + '"'
-    + ' onerror="this.replaceWith(Object.assign(document.createElement(\'b\'),{textContent:this.alt}))">';
+  return '<img class="' + cls + '" src="' + esc(resolveLogo(sp.logo)) + '" alt="' + esc(sp.name) + '"'
+    + ' onerror="imgFallback(this)">';
 }
 function noteCount(){ return Object.values(NOTES).filter(v => v && v.trim()).length; }
 function refreshBadge(){
@@ -621,8 +652,8 @@ function renderAgenda(){
       circuit = it.circuit;
       const cs = (typeof CIRCUIT_SPONSORS !== 'undefined') ? CIRCUIT_SPONSORS[it.circuit] : null;
       html += '<div class="circuit"><span>' + esc(it.circuit) + ' · ' + range_(it.start, it.end) + '</span>'
-        + (cs ? '<span class="csp"><img src="' + esc(cs.logo) + '" alt="' + esc(cs.name) + '"'
-            + ' onerror="this.replaceWith(Object.assign(document.createElement(\'b\'),{textContent:this.alt}))"></span>' : '')
+        + (cs ? '<span class="csp"><img src="' + esc(resolveLogo(cs.logo)) + '" alt="' + esc(cs.name) + '"'
+            + ' onerror="imgFallback(this)"></span>' : '')
         + '</div>';
     }
     if(!it.circuit) circuit = null;
@@ -647,7 +678,7 @@ function renderAgenda(){
         + (minor && it.room ? '<span class="inlineroom">' + esc(it.room) + '</span>' : '')
         + (it.speaker ? '<p class="who">' + esc(it.speaker) + '</p>' : '')
         + (tags.length ? '<div class="meta">' + tags.join('') + '</div>' : '')
-        + (it.sponsor ? '<div class="sponsorline"><span>Sponsored by</span><img src="' + esc(it.sponsor.logo) + '" alt="' + esc(it.sponsor.name) + '" onerror="this.replaceWith(Object.assign(document.createElement(\'b\'),{textContent:this.alt}))"></div>' : '')
+        + (it.sponsor ? '<div class="sponsorline"><span>Sponsored by</span><img src="' + esc(resolveLogo(it.sponsor.logo)) + '" alt="' + esc(it.sponsor.name) + '" onerror="imgFallback(this)"></div>' : '')
       + '</div>'
       + (it._clickable ? '<svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 5l7 7-7 7"/></svg>' : '');
 
@@ -692,8 +723,8 @@ function openSession(id){
   if(shown){
     const lbl = it.sponsor ? 'Sponsored by' : esc(it.circuit) + ' sponsored by';
     html += '<div class="sponsorbox"><small>' + lbl + '</small>'
-      + '<img src="' + esc(shown.logo) + '" alt="' + esc(shown.name) + '"'
-      + ' onerror="this.replaceWith(Object.assign(document.createElement(\'b\'),{textContent:this.alt}))"></div>';
+      + '<img src="' + esc(resolveLogo(shown.logo)) + '" alt="' + esc(shown.name) + '"'
+      + ' onerror="imgFallback(this)"></div>';
   }
   html += noteField('s:' + it._id, 'My notes on this session',
     'Saves automatically on this device. Nobody else can see it.');
@@ -992,8 +1023,8 @@ function renderInfo(){
   /* hotel map */
   if(CONFIG.hotelMapImage){
     html += '<div class="block" id="mapBlock" style="display:none"><h2>Hotel Map</h2>'
-      + '<a id="mapLink" href="' + esc(CONFIG.hotelMapImage) + '" target="_blank" rel="noopener">'
-      + '<img class="mapimg" id="mapImg" src="' + esc(CONFIG.hotelMapImage) + '" alt="Hotel floor plan"></a>'
+      + '<a id="mapLink" href="' + esc(resolveLogo(CONFIG.hotelMapImage)) + '" target="_blank" rel="noopener">'
+      + '<img class="mapimg" id="mapImg" src="' + esc(resolveLogo(CONFIG.hotelMapImage)) + '" alt="Hotel floor plan"></a>'
       + '<p class="hint">Tap to open full size.</p></div>';
   }
 
@@ -1012,8 +1043,8 @@ function renderInfo(){
   if(typeof SPONSORS !== 'undefined' && SPONSORS.length){
     html += '<div class="block"><h2>Thank you to our sponsors</h2><div class="spongrid">'
       + SPONSORS.map(x =>
-          '<figure><div class="mark"><img src="' + esc(x.logo) + '" alt="' + esc(x.name) + '" loading="lazy"'
-          + ' onerror="this.replaceWith(Object.assign(document.createElement(\'span\'),{textContent:this.alt}))"></div>'
+          '<figure><div class="mark"><img src="' + esc(resolveLogo(x.logo)) + '" alt="' + esc(x.name) + '" loading="lazy"'
+          + ' onerror="imgFallback(this)"></div>'
           + '<figcaption>' + esc(x.item) + '</figcaption></figure>').join('')
       + '</div></div>';
   }
@@ -1021,8 +1052,8 @@ function renderInfo(){
   /* exhibitors */
   if(typeof EXHIBITORS !== 'undefined' && EXHIBITORS.length){
     html += '<div class="block"><h2>Thank you to our exhibitors</h2><div class="logogrid">'
-      + EXHIBITORS.map(x => '<div><img src="' + esc(x.logo) + '" alt="' + esc(x.name) + '" loading="lazy"'
-        + ' onerror="this.replaceWith(Object.assign(document.createElement(\'span\'),{textContent:this.alt,style:\'font-size:12px;font-weight:700;text-align:center;color:#4a5666\'}))"></div>').join('')
+      + EXHIBITORS.map(x => '<div><img src="' + esc(resolveLogo(x.logo)) + '" alt="' + esc(x.name) + '" loading="lazy"'
+        + ' onerror="imgFallback(this)"></div>').join('')
       + '</div><p class="hint">Stop by the booths in the Statler Foyer — and get your passport stamped.</p></div>';
   }
 
@@ -1048,7 +1079,13 @@ function renderInfo(){
   const mi = $('#mapImg');
   if(mi){
     mi.addEventListener('load', () => $('#mapBlock').style.display = '');
-    mi.addEventListener('error', () => { const b = $('#mapBlock'); if(b) b.remove(); });
+    mi.addEventListener('error', () => {
+      if(!mi.dataset.retried){
+        const flat = mi.src.replace(/\/assets\//, '/');
+        if(flat !== mi.src){ mi.dataset.retried = '1'; mi.src = flat; return; }
+      }
+      const b = $('#mapBlock'); if(b) b.remove();
+    });
     if(mi.complete && mi.naturalWidth) $('#mapBlock').style.display = '';
   }
 }
@@ -1068,6 +1105,8 @@ $('#installBtn').addEventListener('click', async () => {
 });
 
 /* ============================ boot ============================ */
+$$('.wordmark img[data-src]').forEach(img => { img.src = resolveLogo(img.dataset.src); });
+
 DAY = currentDayId();
 renderDaybar();
 renderAgenda();

@@ -7,22 +7,40 @@ No build step, no framework, no backend. Static files on GitHub Pages.
 
 ## Files
 
+**Every file sits at the top level. There are no folders — deliberately.**
+GitHub's web uploader flattens dragged folders, which silently broke every image
+path the first time around. So all images now live *inside* `logos.js` as data
+URIs and there is nothing nested left to lose.
+
 | File | What it is | Do you edit it? |
 |---|---|---|
-| `data.js` | **All content and settings** — agenda, wifi, roster URL, exhibitors, links | **Yes — this is the only file you normally touch** |
+| `data.js` | **All content and settings** — agenda, wifi, roster URL, sponsors, exhibitors, links | **Yes — this is the only file you normally touch** |
+| `logos.js` | Every logo and the wordmark, embedded as data URIs. Generated — don't hand-edit | No |
 | `index.html` | The app itself (layout, styling, behavior) | Rarely |
-| `sw.js` | Offline caching. Bump `CACHE = 'as26-v3'` → `'as26-v4'` (and so on) when you change content | Only to force a refresh |
+| `sw.js` | Offline caching. Bump `CACHE = 'as26-v4'` → `'as26-v5'` (and so on) when you change content | Only to force a refresh |
 | `manifest.json` | Makes it installable to a phone home screen | No |
-| `assets/logos/` | Exhibitor + sponsor logos | Add files as needed |
-| `assets/icon-*.png` | App icons | No |
-| `assets/hotel-map.png` | **Not included yet.** Drop the floor plan here and the map section appears automatically | Yes, when you get it |
+| `icon-*.png` | Home-screen icons (4 files) | No |
+| `roster-template.csv` | Starter file for the attendee Google Sheet | Not part of the app |
+| `hotel-map.png` | **Not included yet.** Drop the floor plan in at the top level and the map section appears automatically | Yes, when you get it |
+
+### How images work now
+
+`data.js` still refers to logos by friendly path — `assets/logos/uta.png`. At runtime
+the app looks up the filename (`uta`) in `logos.js` and swaps in the embedded image.
+Nothing is ever fetched from disk, so no upload can break it. If a key is somehow
+missing, the app tries the path, then the same filename at the root, and only then
+falls back to the sponsor's name in text.
+
+**To add or change a logo:** send me the image file. `logos.js` is regenerated and I
+hand back the updated file. Dropping a PNG into the repo won't do it any more —
+that's the trade for making the images unbreakable.
 
 ---
 
 ## Step 1 — Create the repo and turn on Pages
 
 1. On GitHub, in the **NACM organization**, create a new **public** repo. Suggested name: `allsouth-2026`
-2. Upload every file in this folder, keeping the `assets/` folder structure intact.
+2. Select **all 11 files** and upload them. No folders to preserve — that's the point.
 3. Repo → **Settings** → **Pages** → Source: **Deploy from a branch** → Branch: `main`, folder: `/ (root)` → **Save**.
 4. Two minutes later the app is live at:
 
@@ -103,7 +121,7 @@ wifi: {
 
 Leave the wifi fields blank and the Info tab shows *"The hotel hasn't released the conference network details yet"* — no broken state. Fill them in when the hotel comes through, commit, and bump the `CACHE` version in `sw.js` so installed phones pick up the change.
 
-**Hotel map:** save the floor plan as `assets/hotel-map.png`. The Info tab detects it and adds a tappable Hotel Map section. If the file isn't there, the section doesn't render at all.
+**Hotel map:** save the floor plan as `hotel-map.png` at the top level of the repo. The Info tab detects it and adds a tappable Hotel Map section. If the file isn't there, the section doesn't render at all. (Send it to me instead and I'll embed it like the logos.)
 
 Also worth filling in when you have them:
 
@@ -118,7 +136,7 @@ surveyUrl:     "…",   // adds a "Feedback survey" button
 
 ## Step 4 — Adding a sponsor logo to a session
 
-1. Put the logo in `assets/logos/` (PNG, transparent background, ~560px wide is plenty)
+1. Send me the logo — it gets embedded into `logos.js` under a short key (e.g. `uta`)
 2. Add a `sponsor` block to that agenda item in `data.js`:
 
 ```js
