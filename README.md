@@ -17,7 +17,7 @@ URIs and there is nothing nested left to lose.
 | `data.js` | **All content and settings** — agenda, wifi, roster URL, sponsors, exhibitors, links | **Yes — this is the only file you normally touch** |
 | `logos.js` | Every logo and the wordmark, embedded as data URIs. Generated — don't hand-edit | No |
 | `index.html` | The app itself (layout, styling, behavior) | Rarely |
-| `sw.js` | Offline caching. Bump `CACHE = 'as26-v6'` → `'as26-v7'` (and so on) when you change content | Only to force a refresh |
+| `sw.js` | Offline caching. Bump `CACHE = 'as26-v8'` → `'as26-v9'` (and so on) when you change content | Only to force a refresh |
 | `manifest.json` | Makes it installable to a phone home screen | No |
 | `icon-*.png` | Home-screen icons (4 files) | No |
 | `roster-template.csv` | Starter file for the attendee Google Sheet | Not part of the app |
@@ -55,55 +55,88 @@ That's the URL to put behind the QR code in the printed program.
 
 ---
 
-## Step 2 — Set up the live attendee list (Google Sheet)
+## Step 2 — The live attendee list
 
-**Why Google and not OneDrive:** the app is static JavaScript running in the attendee's browser. It has to fetch a raw CSV file directly. OneDrive/SharePoint share links return an HTML viewer page, not the file, and there's no CORS-open public endpoint without a Microsoft Graph token — which can't be safely embedded in a public page. Google Sheets has a purpose-built endpoint for exactly this. That's the whole reason.
+**Already wired.** `data.js` points at the published CSV of your roster sheet,
+read live on every app load. Editing the sheet updates the app — no commit needed.
 
-### 2a. Build the sheet
+### Your sheet's columns
 
-Create a Google Sheet with **row 1 as headers**. The app recognizes these column names (case-insensitive, any order, extras ignored):
-
-| Header | Required | Notes |
-|---|---|---|
-| `Name` | ✅ | Or use separate `First` / `Last` columns |
-| `Title` | | Job title |
-| `Company` | | |
-| `City` | | |
-| `Email` | | Adds an "Email ___" button on their card |
-| `Group` | | Industry group / attendee type — shows as a chip |
-
-Sorting happens automatically by **last name**. Don't worry about ordering the sheet.
-
-A starter file is included: **`roster-template.csv`** — import it into a new Google Sheet
-(File → Import → Upload) and replace the sample rows.
-
-### 2b. Publish it
-
-1. In the Sheet: **File → Share → Publish to web**
-2. **Link** tab
-3. First dropdown: pick the specific tab (not "Entire Document")
-4. Second dropdown: **Comma-separated values (.csv)**
-5. Click **Publish**, confirm
-6. Copy the URL. It looks like:
-   `https://docs.google.com/spreadsheets/d/e/2PACX-.../pub?gid=0&single=true&output=csv`
-
-### 2c. Wire it up
-
-Paste that URL into `data.js`:
-
-```js
-rosterCsvUrl: "https://docs.google.com/spreadsheets/d/e/2PACX-.../pub?gid=0&single=true&output=csv",
+```
+Company | First Name | Last Name | Type | Email
 ```
 
-Commit. Done. From then on, **editing the Sheet updates the app** — no commits needed.
+The app reads all five. `Type` drives the privacy rule below. Rows sort by last
+name automatically, so the sheet's own order doesn't matter.
 
-### Things to know
+Other recognized headers, if you ever add them: `Name` (instead of First/Last),
+`Title`, `City`, `Group`. Extra columns are ignored.
 
-- **Propagation is not instant.** Google caches the published CSV for roughly 5 minutes. Edit, wait, then refresh.
-- **That URL is public** to anyone who has it. Only put names, titles, companies, cities on the sheet — the same information that's on a name badge. **No phone numbers, no home addresses, and think twice about emails.**
-- **Don't publish the whole document** — publish only the roster tab, so your internal columns (payment status, dietary notes, comps) stay private. Better still: keep your working registration sheet separate and have the published tab pull from it with formulas, e.g. `=FILTER(Registrations!A2:E, Registrations!F2:F="Paid")`.
-- **Unpublishing** is the same menu: File → Share → Publish to web → **Stop publishing**. Do this after the conference.
-- The app caches the last roster it successfully loaded, so it still shows a list if the hotel wifi dies mid-conference.
+### The member / exhibitor rule
+
+| | Shown in the app |
+|---|---|
+| **Member** | Name, company. No email, no chip. |
+| **Exhibitor** | Name, company, an **Exhibitor** badge, and an "Email —" button. |
+
+Your sheet already leaves member emails blank, which is the part that actually
+matters. The app enforces the same rule a second time: an address sitting in a
+`Type = Member` row is dropped before the roster is even built.
+
+**But understand where the real boundary is.** That sheet is readable by anyone
+who has its ID — that's what lets the app read it without a login. So the
+protection is *the cell being empty in the sheet*, not the app declining to
+display it. Never put member emails, phone numbers, or home addresses on this
+sheet, and keep payment status, comps, and dietary notes on a **different
+document** — not just a different tab.
+
+### Two URLs, tried in order
+
+`rosterCsvUrl` is a list. The app tries each and keeps the first that returns rows:
+
+1. **The published-to-web CSV** (primary, wired). Built for a web page to read.
+2. **The `gviz` endpoint** for the same sheet — a standby, used only if the
+   published URL ever stops answering.
+
+Verified: with both wired, the app hits the published URL and never touches the
+standby. Kill the published URL and it recovers from the standby with no visible
+change to the attendee.
+
+If you ever re-publish the sheet, Google may issue a **new** `2PACX-…` URL. The
+old one goes dead, so send me the new one and I'll swap slot 1.
+
+### How fresh is it?
+
+Not instant, but close enough for a conference:
+
+- **Google's cache is the bottleneck**, roughly 5 minutes on a published CSV.
+  A registrant you add now shows up in the app a few minutes later, not
+  immediately.
+- **The app never caches it.** Every load fetches with `no-store` plus a
+  cache-buster, and the service worker is explicitly told to leave Google's
+  domains alone. So the app is always asking for the newest copy.
+- **The attendee still has to reload.** The roster is read on app open, not
+  streamed. Someone who left the app sitting on screen for an hour sees the list
+  from an hour ago until they pull to refresh or reopen it.
+- **No commit, ever.** Once slot 1 is wired, editing the sheet is the only step.
+  Adding registrants never requires touching GitHub.
+
+Net effect: add a name, wait about five minutes, reopen the app, and it's there.
+
+### Other things to know
+
+- **Duplicates are handled.** Your sheet has four exhibitors entered twice
+  (Trisha Epino, Sabrina Buckley, Madison Cross, Brian Shappell). The app
+  de-duplicates on name + company, so they appear once. Fixing the sheet is
+  still tidier.
+- **One row needs your attention:** Jennifer at Sunbelt Solomon Services has no
+  last name — the cell reads as blank or `TRUE`, which is Sheets coercing a
+  surname like "True" into a boolean. The app shows her as just "Jennifer" and
+  files her under J. Retype it with a leading apostrophe (`'True`) to fix.
+- **Offline resilience.** The last roster that loaded successfully is cached on
+  the device, so the list still works if the hotel wifi dies mid-conference.
+- **After the conference:** File → Share → Publish to web → Stop publishing, or
+  set the sheet's link sharing back to restricted.
 
 ---
 

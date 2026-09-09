@@ -20,10 +20,20 @@ const CONFIG = {
   },
 
   // ---- LIVE ATTENDEE LIST --------------------------------------------------
-  // Paste the "Publish to web → CSV" link from your Google Sheet here.
-  // Instructions are in README.md. Leave blank and the tab shows a friendly
-  // "list posts soon" message instead of an error.
-  rosterCsvUrl: "",
+  // The app tries these in order and uses the first one that returns rows.
+  //
+  //  [0] The "File → Share → Publish to web → CSV" link. This is the reliable
+  //      one: it is explicitly built to be read by a web page. Paste it here
+  //      when you have it and it becomes the primary source.
+  //  [1] The gviz endpoint for the same sheet. Works today because the sheet
+  //      is shared "anyone with the link can view" — no publishing needed —
+  //      but Google does not guarantee a browser can read it cross-origin.
+  //
+  // Leaving [0] blank is fine; blank entries are skipped.
+  rosterCsvUrl: [
+    "https://docs.google.com/spreadsheets/d/e/2PACX-1vS0FVjgCuVTqvGzJf1rC_rWC7iiu7BjK2V72JqXxbREu6-7y2RAr1t6PwObEqFUwCqG-2XmQU2_fi0g/pub?gid=0&single=true&output=csv",
+    "https://docs.google.com/spreadsheets/d/10G8QOV1DjaTTCvytfiLsC4fzXkmPNr7YuVgPOkAviUU/gviz/tq?tqx=out:csv"
+  ],
 
   // ---- LINKS ---------------------------------------------------------------
   surveyUrl: "",                 // feedback survey

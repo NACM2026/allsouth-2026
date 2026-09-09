@@ -174,6 +174,10 @@ header{
 .tag.key{background:color-mix(in srgb,var(--gold) 20%,transparent);color:var(--amber)}
 .tag.tba{background:color-mix(in srgb,var(--amber) 16%,transparent);color:var(--amber)}
 .tag.note{background:color-mix(in srgb,var(--green) 15%,transparent);color:var(--green)}
+.tag.exh{background:color-mix(in srgb,var(--gold) 20%,transparent);color:var(--amber)}
+.exhdot{font-style:normal;font-size:9.5px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;
+  background:color-mix(in srgb,var(--gold) 20%,transparent);color:var(--amber);
+  border-radius:4px;padding:2px 5px;vertical-align:1px;margin-left:5px}
 .sponsorline{display:flex;align-items:center;gap:8px;margin-top:10px;padding-top:10px;border-top:1px solid var(--line-2)}
 .sponsorline span{font-size:10.5px;font-weight:700;letter-spacing:.7px;text-transform:uppercase;color:var(--ink-3);white-space:nowrap}
 .sponsorline b{font-size:12.5px;font-weight:700;line-height:1.25}
@@ -777,15 +781,30 @@ function mapRoster(rows){
   const iMail  = find('email','e-mail','email address');
   const iGroup = find('group','industry','industry group','type');
 
+  const seen = new Set();
   return rows.slice(1).map(r => {
     const get = i => (i >= 0 && r[i] != null) ? String(r[i]).trim() : '';
     let name = get(iName);
     if(!name) name = [get(iFirst), get(iLast)].filter(Boolean).join(' ');
     if(!name) return null;
+
+    const group = get(iGroup);
+    const isExhibitor = /exhib/i.test(group);
+
+    /* Emails are for exhibitors only. The sheet already leaves member emails
+       blank; this makes that a rule the app enforces too, so a stray address
+       pasted into a member row never shows up in the roster. */
+    const email = isExhibitor ? get(iMail) : '';
+
+    const company = get(iComp);
+    const key = (name + '|' + company).toLowerCase().replace(/\s+/g,' ');
+    if(seen.has(key)) return null;          // the sheet has a few duplicated rows
+    seen.add(key);
+
     return {
-      name, title: get(iTitle), company: get(iComp),
-      city: get(iCity), email: get(iMail), group: get(iGroup),
-      id: slug(name + '-' + get(iComp))
+      name, title: get(iTitle), company,
+      city: get(iCity), email, group, isExhibitor,
+      id: slug(name + '-' + company)
     };
   }).filter(Boolean).sort((a,b) => {
     const la = a.name.trim().split(/\s+/).pop().toLowerCase();
@@ -796,23 +815,37 @@ function mapRoster(rows){
 
 async function loadRoster(){
   ROSTER_TRIED = true;
-  if(!CONFIG.rosterCsvUrl){ ROSTER_STATE = 'unset'; renderPeople(); return; }
+  /* rosterCsvUrl may be a single URL or a list of candidates. Google serves the
+     same sheet from more than one endpoint and not all of them allow a browser
+     to read them cross-origin, so we try each in order and keep the first that
+     returns rows. Blank entries are skipped. */
+  const candidates = (Array.isArray(CONFIG.rosterCsvUrl) ? CONFIG.rosterCsvUrl : [CONFIG.rosterCsvUrl])
+    .filter(u => u && String(u).trim());
+  if(!candidates.length){ ROSTER_STATE = 'unset'; renderPeople(); return; }
 
   try{ const c = localStorage.getItem(ROSTER_CACHE); if(c){ ROSTER = JSON.parse(c); ROSTER_STATE = ROSTER.length ? 'ok' : 'idle'; } }catch(e){}
 
   ROSTER_STATE = ROSTER.length ? 'ok' : 'loading';
   renderPeople();
 
-  try{
-    const url = CONFIG.rosterCsvUrl + (CONFIG.rosterCsvUrl.includes('?') ? '&' : '?') + 'cb=' + Date.now();
-    const res = await fetch(url, { cache:'no-store' });
-    if(!res.ok) throw new Error('HTTP ' + res.status);
-    const list = mapRoster(parseCSV(await res.text()));
-    ROSTER = list;
-    ROSTER_STATE = list.length ? 'ok' : 'empty';
-    try{ localStorage.setItem(ROSTER_CACHE, JSON.stringify(list)); }catch(e){}
-  }catch(err){
-    if(!ROSTER.length) ROSTER_STATE = 'error';
+  let loaded = null, lastErr = null;
+  for(const base of candidates){
+    try{
+      const url = base + (base.includes('?') ? '&' : '?') + 'cb=' + Date.now();
+      const res = await fetch(url, { cache:'no-store' });
+      if(!res.ok) throw new Error('HTTP ' + res.status);
+      const list = mapRoster(parseCSV(await res.text()));
+      if(list.length){ loaded = list; break; }
+      lastErr = new Error('no rows');
+    }catch(err){ lastErr = err; }
+  }
+
+  if(loaded){
+    ROSTER = loaded;
+    ROSTER_STATE = 'ok';
+    try{ localStorage.setItem(ROSTER_CACHE, JSON.stringify(loaded)); }catch(e){}
+  } else if(!ROSTER.length){
+    ROSTER_STATE = (lastErr && lastErr.message === 'no rows') ? 'empty' : 'error';
   }
   renderPeople();
 }
@@ -855,8 +888,9 @@ function renderPeople(){
     const hasNote = !!(NOTES['p:' + p.id] || '').trim();
     html += '<button class="prow" data-person="' + esc(p.id) + '">'
       + '<span class="av">' + esc(initials(p.name)) + '</span>'
-      + '<span class="pinfo"><b>' + esc(p.name) + '</b><span>'
-        + esc([p.title, p.company].filter(Boolean).join(' · ') || p.city || '&nbsp;') + '</span></span>'
+      + '<span class="pinfo"><b>' + esc(p.name)
+        + (p.isExhibitor ? ' <em class="exhdot">Exhibitor</em>' : '') + '</b><span>'
+        + esc([p.title, p.company].filter(Boolean).join(' · ') || p.city || '') + '</span></span>'
       + (hasNote ? '<span class="dot" title="You have a note"></span>' : '')
       + '<svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 5l7 7-7 7"/></svg>'
       + '</button>';
@@ -874,7 +908,7 @@ function openPerson(id){
   if(!p) return;
   const lines = [p.title, p.company, p.city].filter(Boolean).join('<br>');
   let html = lines ? '<p class="who2">' + lines + '</p>' : '';
-  if(p.group) html += '<div class="meta" style="margin:0 0 14px"><span class="tag">' + esc(p.group) + '</span></div>';
+  if(p.isExhibitor) html += '<div class="meta" style="margin:0 0 14px"><span class="tag exh">Exhibitor</span></div>';
   if(p.email){
     html += '<div class="linkrow"><a href="mailto:' + esc(p.email) + '">Email ' + esc(p.name.split(' ')[0]) + '</a>'
       + '<a href="https://www.linkedin.com/search/results/people/?keywords=' + encodeURIComponent(p.name + ' ' + (p.company||'')) + '" target="_blank" rel="noopener">Find on LinkedIn</a></div>';
