@@ -11,7 +11,7 @@ No build step, no framework, no backend. Static files on GitHub Pages.
 |---|---|---|
 | `data.js` | **All content and settings** — agenda, wifi, roster URL, exhibitors, links | **Yes — this is the only file you normally touch** |
 | `index.html` | The app itself (layout, styling, behavior) | Rarely |
-| `sw.js` | Offline caching. Bump `CACHE = 'as26-v1'` → `'as26-v2'` when you change content | Only to force a refresh |
+| `sw.js` | Offline caching. Bump `CACHE = 'as26-v3'` → `'as26-v4'` (and so on) when you change content | Only to force a refresh |
 | `manifest.json` | Makes it installable to a phone home screen | No |
 | `assets/logos/` | Exhibitor + sponsor logos | Add files as needed |
 | `assets/icon-*.png` | App icons | No |
@@ -132,7 +132,28 @@ surveyUrl:     "…",   // adds a "Feedback survey" button
 
 The logo then shows on the agenda card *and* large in the session detail sheet. If a logo file is missing, the app falls back to the sponsor's name in text rather than showing a broken image.
 
-**Currently wired:** Dun & Bradstreet on the Welcome Reception; Bell Nunnally & Martin on the two Bell Nunnally sessions. Add or remove as sponsorships firm up.
+**Currently wired** (from the sponsorship grid):
+
+| Slot | Sponsor |
+|---|---|
+| Wednesday Welcome Speaker — "The Intentional Leader" | United TranzActions |
+| Wednesday Reception | Dun & Bradstreet |
+| Thursday Keynote — "Staying Grounded in Busy Times" | Randall K. Lindley / Bell Nunnally & Martin |
+| Thursday Education Circuits I–IV | Professional Alternatives *(via `CIRCUIT_SPONSORS`)* |
+| Thursday Lunch | Jameson & Dunagan, P.C. |
+| Exhibitor Game — "Guess Whose Baby Photo?" | Hicks Law Group |
+| Thursday Breaks (all 3) | NCS Credit |
+| Thursday PM Reception at The Henley | NACM National Trade Credit Report |
+| Friday Prize Drawings | Pierson Ferdinand LLP |
+| Registration Lanyards | Handle.com *(Info tab only)* |
+| Welcome Gift for Attendees | Emagia *(Info tab only)* |
+
+The All South Portal Button sponsors (UTA, Zoom Lien) are deliberately left off —
+two commented lines at the end of `SPONSORS` in `data.js` will restore them.
+
+**Unsold as of last update:** Pre-Conference Email (3 available), Charging Station,
+Wednesday Best Practices Break, Thursday Breakfast, Friday Breakfast, Friday AI
+Speaker, Friday Economic Speaker.
 
 ---
 
@@ -145,6 +166,35 @@ The tradeoff: notes don't sync between a phone and a laptop, and clearing browse
 If you ever want notes to sync across devices, that requires a backend (Supabase, like the TRMA benchmarking portal) and some form of sign-in. Different project.
 
 ---
+
+## Theme
+
+The app is locked to the light theme — `data-theme="light"` on the `<html>` tag in
+`index.html`. Attendees' phones set to dark mode still see the light design.
+
+This is deliberate: nearly every sponsor logo is drawn for a white background, and
+a dark UI made some of them (and any missing-logo fallback text) hard to read.
+
+The dark-mode CSS is still in the file but inert — every dark block is guarded with
+`:root:not([data-theme="light"])`. To turn automatic dark mode back on, delete that
+attribute from the `<html>` tag and restore the two `theme-color` meta tags noted in
+the comment above the CSS tokens.
+
+## Where sponsor logos appear
+
+A sponsor's logo shows in every place their slot is represented — no tapping required:
+
+| Location | What shows |
+|---|---|
+| Agenda card | "Sponsored by" row with the logo, on the card itself |
+| Circuit heading | Circuit sponsor's logo beside the heading |
+| Session detail sheet | Large logo in a bordered box |
+| "Happening now / Up next" banner | Logo for the live or next session |
+| My Notes → My schedule | Small logo under each saved session |
+| Info → Thank you to our sponsors | Logo tile captioned with the slot purchased |
+
+If a logo file is missing, the app falls back to the sponsor's name in text rather
+than a broken image — so a missing file is a cosmetic issue, never a broken page.
 
 ## Publishing an update
 
