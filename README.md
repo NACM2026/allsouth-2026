@@ -17,7 +17,7 @@ URIs and there is nothing nested left to lose.
 | `data.js` | **All content and settings** — agenda, wifi, roster URL, sponsors, exhibitors, links | **Yes — this is the only file you normally touch** |
 | `logos.js` | Every logo and the wordmark, embedded as data URIs. Generated — don't hand-edit | No |
 | `index.html` | The app itself (layout, styling, behavior) | Rarely |
-| `sw.js` | Offline caching. Bump `CACHE = 'as26-v5'` → `'as26-v6'` (and so on) when you change content | Only to force a refresh |
+| `sw.js` | Offline caching. Bump `CACHE = 'as26-v6'` → `'as26-v7'` (and so on) when you change content | Only to force a refresh |
 | `manifest.json` | Makes it installable to a phone home screen | No |
 | `icon-*.png` | Home-screen icons (4 files) | No |
 | `roster-template.csv` | Starter file for the attendee Google Sheet | Not part of the app |
@@ -184,6 +184,18 @@ The tradeoff: notes don't sync between a phone and a laptop, and clearing browse
 If you ever want notes to sync across devices, that requires a backend (Supabase, like the TRMA benchmarking portal) and some form of sign-in. Different project.
 
 ---
+
+## Sticky headers
+
+The wordmark header and the Wed/Thu/Fri day selector both stay pinned while the
+agenda scrolls, so the day you're looking at is always visible. Same for the
+search box on the Attendees tab.
+
+The header's height isn't fixed — it changes with the phone's notch/safe-area
+inset and settles only after the wordmark image decodes — so the app measures it
+at runtime and feeds the value to CSS as `--hdr-h`. A `ResizeObserver` keeps it
+current through rotation and font-size changes. If you ever change the header's
+padding or logo height, nothing needs adjusting; it re-measures itself.
 
 ## Theme
 
