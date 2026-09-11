@@ -17,7 +17,7 @@ URIs and there is nothing nested left to lose.
 | `data.js` | **All content and settings** — agenda, wifi, roster URL, sponsors, exhibitors, links | **Yes — this is the only file you normally touch** |
 | `logos.js` | Every logo, the wordmark, and the hotel floor plan, embedded as data URIs. Generated — don't hand-edit | No |
 | `index.html` | The app itself (layout, styling, behavior) | Rarely |
-| `sw.js` | Offline caching. Bump `CACHE = 'as26-v11'` → `'as26-v12'` (and so on) when you change content | Only to force a refresh |
+| `sw.js` | Offline caching. Bump `CACHE = 'as26-v12'` → `'as26-v13'` (and so on) when you change content | Only to force a refresh |
 | `manifest.json` | Makes it installable to a phone home screen | No |
 | `icon-*.png` | Home-screen icons (4 files) | No |
 | `roster-template.csv` | Starter file for the attendee Google Sheet | Not part of the app |

@@ -40,7 +40,7 @@ const CONFIG = {
   programPdfUrl: "",             // full PDF program
   websiteUrl: "https://nacmsw.com",
   supportEmail: "tony@nacmsw.com",
-  supportPhone: "972-536-0400",
+  supportPhone: "",              // blank = the "Questions" row is hidden entirely
 
   // ---- HOTEL MAP -----------------------------------------------------------
   // Drop hotel-map.png at the top level of the repo (or .jpg and change this).
