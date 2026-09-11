@@ -277,22 +277,72 @@ header{
   border-radius:var(--r-sm);padding:12px 14px;line-height:1.55;
 }
 
+/* ---------- map ---------- */
+.maphint{margin:14px 16px 0;font-size:13px;color:var(--ink-2);line-height:1.5}
+.mapcard{margin:12px 16px;background:var(--surface);border:1px solid var(--line);
+  border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden}
+.maptools{display:flex;align-items:center;justify-content:space-between;gap:10px;
+  padding:10px 12px;border-bottom:1px solid var(--line-2)}
+.maptools span{font-size:11px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:var(--ink-3)}
+.zoombtn{border:1px solid var(--line);background:var(--surface-2);color:var(--ink-2);
+  border-radius:8px;padding:7px 12px;font-size:12.5px;font-weight:700}
+.mapwrap{overflow:auto;-webkit-overflow-scrolling:touch;background:#fff}
+.mapstage{position:relative;display:block;transform-origin:0 0}
+.mapstage img{display:block;width:100%;height:auto}
+.pin{position:absolute;transform:translate(-50%,-50%);width:21px;height:21px;border-radius:99px;
+  background:var(--navy);color:#fff;border:1.5px solid #fff;display:flex;align-items:center;
+  justify-content:center;font-size:11px;font-weight:800;box-shadow:0 1px 3px rgba(0,0,0,.45);
+  cursor:pointer;padding:0;line-height:1}
+.pin.on{background:var(--amber);transform:translate(-50%,-50%) scale(1.45);z-index:5;
+  box-shadow:0 0 0 3px rgba(255,255,255,.85),0 2px 6px rgba(0,0,0,.5)}
+.legend{list-style:none;margin:0;padding:0}
+.legend li{display:flex;gap:11px;align-items:flex-start;padding:11px 14px;border-top:1px solid var(--line-2);
+  cursor:pointer;-webkit-tap-highlight-color:transparent}
+.legend li:first-child{border-top:0}
+.legend li.on{background:var(--blue-soft)}
+.legend .num{flex:0 0 24px;height:24px;border-radius:99px;background:var(--navy);color:#fff;
+  display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;margin-top:1px}
+.legend li.on .num{background:var(--amber)}
+.legend .txt b{display:block;font-size:14.5px;font-weight:700}
+.legend .txt span{display:block;font-size:12.5px;color:var(--ink-2);margin-top:2px;line-height:1.45}
+.legend .cnt{font-size:11px;font-weight:700;color:var(--blue);margin-top:4px;display:block}
+
+/* ---------- install help ---------- */
+.installcard{margin:14px 16px;background:var(--navy);color:#fff;border-radius:var(--r);padding:16px}
+.installcard h2{margin:0 0 6px;font-size:15.5px;font-weight:750}
+.installcard p{margin:0;font-size:13.5px;line-height:1.55;opacity:.85}
+.installcard .go{margin-top:12px;border:1px solid rgba(255,255,255,.34);background:rgba(255,255,255,.12);
+  color:#fff;border-radius:9px;padding:10px 14px;font-size:13.5px;font-weight:700;width:100%}
+.steps{list-style:none;counter-reset:st;margin:0;padding:0}
+.steps li{counter-increment:st;display:flex;gap:12px;padding:11px 0;border-top:1px solid var(--line-2);
+  font-size:14.5px;line-height:1.5}
+.steps li:first-child{border-top:0}
+.steps li::before{content:counter(st);flex:0 0 24px;height:24px;border-radius:99px;
+  background:var(--blue-soft);color:var(--blue);display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:800}
+.steps kbd{font:inherit;font-weight:750;background:var(--line-2);border-radius:5px;padding:1px 6px}
+.banner{margin:12px 16px 0;background:var(--blue-soft);border:1px solid color-mix(in srgb,var(--blue) 30%,transparent);
+  border-radius:var(--r);padding:12px 14px;display:flex;gap:12px;align-items:center}
+.banner div{flex:1;font-size:13px;line-height:1.45;color:var(--ink-2)}
+.banner b{display:block;color:var(--ink);font-size:13.5px;margin-bottom:2px}
+.banner .x2{flex:0 0 26px;height:26px;border:0;border-radius:99px;background:transparent;color:var(--ink-3);font-size:18px;line-height:1}
+
 /* ---------- bottom nav ---------- */
 nav{
   position:fixed;bottom:0;left:0;right:0;z-index:50;
   background:color-mix(in srgb,var(--surface) 92%, transparent);
   backdrop-filter:saturate(180%) blur(14px);-webkit-backdrop-filter:saturate(180%) blur(14px);
   border-top:1px solid var(--line);
-  display:grid;grid-template-columns:repeat(4,1fr);
+  display:grid;grid-template-columns:repeat(5,1fr);
   padding-bottom:var(--safe-b);
 }
 nav button{
-  border:0;background:none;padding:8px 4px 7px;display:flex;flex-direction:column;
-  align-items:center;gap:3px;color:var(--ink-3);font-size:10.5px;font-weight:650;
+  border:0;background:none;padding:8px 2px 7px;display:flex;flex-direction:column;
+  align-items:center;gap:3px;color:var(--ink-3);font-size:9.5px;font-weight:650;
   -webkit-tap-highlight-color:transparent;
 }
 nav button.on{color:var(--blue)}
-nav svg{width:23px;height:23px}
+nav svg{width:22px;height:22px}
 .badge{
   position:absolute;transform:translate(15px,-4px);background:var(--blue);color:#fff;
   border-radius:99px;min-width:16px;height:16px;font-size:10px;font-weight:800;
@@ -370,6 +420,11 @@ textarea:focus{outline:2px solid color-mix(in srgb,var(--blue) 45%,transparent);
 </header>
 
 <!-- ===================== AGENDA ===================== -->
+<div class="banner" id="installBanner" hidden>
+  <div><b>Add this to your home screen</b>Opens full screen, works offline, and saves hunting for the link.</div>
+  <button class="x2" id="bannerX" aria-label="Dismiss">&times;</button>
+</div>
+
 <section class="view on" id="view-agenda">
   <div class="daybar" id="daybar"></div>
   <div class="nowbar" id="nowbar"></div>
@@ -383,6 +438,11 @@ textarea:focus{outline:2px solid color-mix(in srgb,var(--blue) 45%,transparent);
     <input class="search" id="psearch" type="search" placeholder="Search name, company, or title" autocomplete="off">
   </div>
   <div id="peopleBody"></div>
+</section>
+
+<!-- ===================== MAP ===================== -->
+<section class="view" id="view-map">
+  <div id="mapBody"></div>
 </section>
 
 <!-- ===================== NOTES ===================== -->
@@ -404,6 +464,10 @@ textarea:focus{outline:2px solid color-mix(in srgb,var(--blue) 45%,transparent);
   <button data-tab="people">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="9" cy="8" r="3.4"/><path d="M2.8 20c.5-3.5 3.1-5.6 6.2-5.6s5.7 2.1 6.2 5.6"/><path d="M16.5 5.2a3.2 3.2 0 010 6M18.3 14.9c2 .7 3.3 2.5 3.6 5.1"/></svg>
     Attendees
+  </button>
+  <button data-tab="map">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3.5 3.5 5.8v14.7L9 18.2l6 2.3 5.5-2.3V3.5L15 5.8z"/><path d="M9 3.5v14.7M15 5.8v14.7"/></svg>
+    Map
   </button>
   <button data-tab="notes">
     <span class="badge" id="noteBadge"></span>
@@ -542,6 +606,7 @@ function setTab(t){
   $$('#nav button').forEach(b => b.classList.toggle('on', b.dataset.tab === t));
   window.scrollTo(0,0);
   if(t === 'notes') renderNotes();
+  if(t === 'map')   renderMap();
   if(t === 'people' && !ROSTER_TRIED) loadRoster();
 }
 $$('#nav button').forEach(b => b.addEventListener('click', () => setTab(b.dataset.tab)));
@@ -1026,10 +1091,163 @@ function renderNotes(){
   });
 }
 
+/* ============================ map tab ============================ */
+let MAP_ZOOM = 1;
+let MAP_SEL  = null;
+
+function sessionsInRoom(rooms){
+  if(!rooms || !rooms.length) return 0;
+  return FLAT.filter(i => rooms.includes(i.room) && i.kind !== 'logistics').length;
+}
+
+function renderMap(){
+  const box = $('#mapBody');
+  if(typeof MAP_PINS === 'undefined' || !MAP_PINS.length){
+    box.innerHTML = '<div class="empty">Map coming soon.</div>';
+    return;
+  }
+  const src = resolveLogo('hotel-map.png');
+
+  let html = '<p class="maphint">Everything happens on the first floor. '
+    + 'Tap a number on the map or in the list to highlight it.</p>';
+
+  html += '<div class="mapcard">'
+    + '<div class="maptools"><span>Hilton Southlake · First Floor</span>'
+    + '<button class="zoombtn" id="zoomBtn">Zoom in</button></div>'
+    + '<div class="mapwrap" id="mapWrap"><div class="mapstage" id="mapStage">'
+    + '<img src="' + esc(src) + '" alt="Hilton Southlake first floor plan">'
+    + MAP_PINS.map(pn => '<button class="pin" data-pin="' + pn.n + '"'
+        + ' style="left:' + pn.x + '%;top:' + pn.y + '%"'
+        + ' aria-label="' + esc(pn.name) + '">' + pn.n + '</button>').join('')
+    + '</div></div>';
+
+  html += '<ul class="legend">' + MAP_PINS.map(pn => {
+      const c = sessionsInRoom(pn.rooms);
+      return '<li data-leg="' + pn.n + '"><span class="num">' + pn.n + '</span>'
+        + '<span class="txt"><b>' + esc(pn.name) + '</b><span>' + esc(pn.note) + '</span>'
+        + (c ? '<span class="cnt">' + c + (c === 1 ? ' item' : ' items') + ' on the agenda here</span>' : '')
+        + '</span></li>';
+    }).join('') + '</ul></div>';
+
+  html += '<p class="foot">Floor plan courtesy of Hilton Southlake Town Square.</p>';
+  box.innerHTML = html;
+
+  const stage = $('#mapStage'), wrap = $('#mapWrap'), zb = $('#zoomBtn');
+  function applyZoom(){
+    stage.style.width = (MAP_ZOOM * 100) + '%';
+    zb.textContent = MAP_ZOOM > 1 ? 'Fit to screen' : 'Zoom in';
+  }
+  applyZoom();
+  zb.addEventListener('click', () => {
+    const midX = (wrap.scrollLeft + wrap.clientWidth / 2) / (wrap.scrollWidth || 1);
+    const midY = (wrap.scrollTop + wrap.clientHeight / 2) / (wrap.scrollHeight || 1);
+    MAP_ZOOM = MAP_ZOOM > 1 ? 1 : 2.4;
+    applyZoom();
+    requestAnimationFrame(() => {
+      wrap.scrollLeft = midX * wrap.scrollWidth - wrap.clientWidth / 2;
+      wrap.scrollTop  = midY * wrap.scrollHeight - wrap.clientHeight / 2;
+    });
+  });
+
+  function select(n, scrollMap){
+    MAP_SEL = (MAP_SEL === n) ? null : n;
+    $$('#mapBody .pin').forEach(b => b.classList.toggle('on', +b.dataset.pin === MAP_SEL));
+    $$('#mapBody .legend li').forEach(li => li.classList.toggle('on', +li.dataset.leg === MAP_SEL));
+    if(MAP_SEL && scrollMap){
+      const pin = $('#mapBody .pin[data-pin="' + MAP_SEL + '"]');
+      if(pin){
+        wrap.scrollTo({ left: pin.offsetLeft - wrap.clientWidth / 2,
+                        top:  pin.offsetTop  - wrap.clientHeight / 2, behavior:'smooth' });
+      }
+    }
+  }
+  $$('#mapBody .pin').forEach(b => b.addEventListener('click', () => select(+b.dataset.pin, false)));
+  $$('#mapBody .legend li').forEach(li => li.addEventListener('click', () => select(+li.dataset.leg, true)));
+}
+
+/* ============================ add to home screen ============================ */
+const INSTALL_DISMISS = 'as26.installdismissed.v1';
+
+function platform(){
+  const ua = navigator.userAgent || '';
+  const iOS = /iPad|iPhone|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  if(iOS) return /CriOS|FxiOS|EdgiOS/.test(ua) ? 'ios-other' : 'ios';
+  if(/Android/.test(ua)) return 'android';
+  return 'desktop';
+}
+function isInstalled(){
+  return window.matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
+}
+
+function installSteps(){
+  const p = platform();
+  if(p === 'ios') return [
+    'Tap the <b>Share</b> button at the bottom of Safari — the square with an arrow pointing up.',
+    'Scroll down the list and tap <b>Add to Home Screen</b>.',
+    'Tap <b>Add</b> in the top right. The All South icon appears with your other apps.'
+  ];
+  if(p === 'ios-other') return [
+    'Open this page in <b>Safari</b> — iPhone only allows adding to the home screen from Safari.',
+    'Tap the <b>Share</b> button, then <b>Add to Home Screen</b>.',
+    'Tap <b>Add</b> in the top right.'
+  ];
+  if(p === 'android') return [
+    'Tap the <b>⋮</b> menu in the top right of Chrome.',
+    'Tap <b>Add to Home screen</b> (it may say <b>Install app</b>).',
+    'Confirm with <b>Add</b> or <b>Install</b>.'
+  ];
+  return [
+    'In Chrome or Edge, look for the <b>install icon</b> in the address bar — a small screen with a down arrow.',
+    'Click it, then confirm <b>Install</b>.',
+    'On a phone, open this page in Safari (iPhone) or Chrome (Android) for the home-screen version.'
+  ];
+}
+
+function openInstallSheet(){
+  const label = { ios:'iPhone / iPad', 'ios-other':'iPhone / iPad', android:'Android', desktop:'Computer' }[platform()];
+  let html = '<p class="who2">' + esc(label) + ' — takes about ten seconds.</p>';
+  if(isInstalled()){
+    html += '<p class="desc"><b>You have already added it.</b> This is the installed version — '
+      + 'you are looking at it right now.</p>';
+  } else {
+    html += '<ol class="steps">' + installSteps().map(t => '<li><span>' + t + '</span></li>').join('') + '</ol>';
+    html += '<p class="hint">Once added, the app opens full screen with no browser bars, and the agenda, '
+      + 'map and your notes keep working even if the hotel wifi drops. The attendee list needs a '
+      + 'connection to refresh, but the last version you loaded stays available.</p>';
+  }
+  openSheet('Add to Home Screen', html);
+}
+
+function initInstallBanner(){
+  const bar = $('#installBanner');
+  if(!bar) return;
+  let dismissed = false;
+  try{ dismissed = localStorage.getItem(INSTALL_DISMISS) === '1'; }catch(e){}
+  if(dismissed || isInstalled()) return;
+  bar.hidden = false;
+  bar.addEventListener('click', e => {
+    if(e.target.closest('#bannerX')){
+      bar.hidden = true;
+      try{ localStorage.setItem(INSTALL_DISMISS, '1'); }catch(e){}
+      return;
+    }
+    openInstallSheet();
+  });
+}
+
 /* ============================ info tab ============================ */
 function renderInfo(){
   const w = CONFIG.wifi || {};
   let html = '';
+
+  /* add to home screen */
+  html += '<div class="installcard"><h2>Add to Home Screen</h2>'
+    + '<p>' + (isInstalled()
+        ? 'Done — you are using the installed version.'
+        : 'Put All South on your home screen so it opens full screen and keeps working if the wifi drops.')
+    + '</p>'
+    + (isInstalled() ? '' : '<button class="go" id="howInstall">Show me how</button>')
+    + '</div>';
 
   /* wifi */
   html += '<div class="wifi"><h2>Hotel Wi‑Fi</h2>';
@@ -1055,13 +1273,7 @@ function renderInfo(){
     + rows.map(r => '<div class="kv"><dt>' + esc(r[0]) + '</dt><dd>' + esc(r[1]) + '</dd></div>').join('')
     + '</dl></div>';
 
-  /* hotel map */
-  if(CONFIG.hotelMapImage){
-    html += '<div class="block" id="mapBlock" style="display:none"><h2>Hotel Map</h2>'
-      + '<a id="mapLink" href="' + esc(resolveLogo(CONFIG.hotelMapImage)) + '" target="_blank" rel="noopener">'
-      + '<img class="mapimg" id="mapImg" src="' + esc(resolveLogo(CONFIG.hotelMapImage)) + '" alt="Hotel floor plan"></a>'
-      + '<p class="hint">Tap to open full size.</p></div>';
-  }
+  /* hotel map now lives on its own tab */
 
   /* buttons */
   const btns = [];
@@ -1089,7 +1301,7 @@ function renderInfo(){
     html += '<div class="block"><h2>Thank you to our exhibitors</h2><div class="logogrid">'
       + EXHIBITORS.map(x => '<div><img src="' + esc(resolveLogo(x.logo)) + '" alt="' + esc(x.name) + '" loading="lazy"'
         + ' onerror="imgFallback(this)"></div>').join('')
-      + '</div><p class="hint">Stop by the booths in the Statler Foyer — and get your passport stamped.</p></div>';
+      + '</div><p class="hint">Stop by their booth tables in the Statler Foyer to learn more about each exhibitor!</p></div>';
   }
 
   /* upcoming */
@@ -1105,24 +1317,15 @@ function renderInfo(){
 
   $('#infoBody').innerHTML = html;
 
+  const hi = $('#howInstall');
+  if(hi) hi.addEventListener('click', openInstallSheet);
+
   $$('#infoBody .copy').forEach(b => b.addEventListener('click', async () => {
     try{ await navigator.clipboard.writeText(b.dataset.copy); b.textContent = 'Copied ✓'; }
     catch(e){ b.textContent = 'Select it above'; }
     setTimeout(() => b.textContent = 'Copy', 1600);
   }));
 
-  const mi = $('#mapImg');
-  if(mi){
-    mi.addEventListener('load', () => $('#mapBlock').style.display = '');
-    mi.addEventListener('error', () => {
-      if(!mi.dataset.retried){
-        const flat = mi.src.replace(/\/assets\//, '/');
-        if(flat !== mi.src){ mi.dataset.retried = '1'; mi.src = flat; return; }
-      }
-      const b = $('#mapBlock'); if(b) b.remove();
-    });
-    if(mi.complete && mi.naturalWidth) $('#mapBlock').style.display = '';
-  }
 }
 
 /* ============================ install prompt ============================ */
@@ -1168,6 +1371,7 @@ DAY = currentDayId();
 renderDaybar();
 renderAgenda();
 renderInfo();
+initInstallBanner();
 refreshBadge();
 $('#agendaFoot').innerHTML = 'Tap a session for the full description.<br>Tap the star to build your own schedule.';
 

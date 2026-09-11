@@ -45,7 +45,7 @@ const CONFIG = {
   // ---- HOTEL MAP -----------------------------------------------------------
   // Drop hotel-map.png at the top level of the repo (or .jpg and change this).
   // If the file isn't there, the section hides itself automatically.
-  hotelMapImage: "hotel-map.png",
+  hotelMapImage: "hotel-map.png",   // embedded in logos.js as "hotel-map"
 
   // Conference dates used for the "Happening now" indicator (local time)
   days: [
@@ -278,6 +278,43 @@ const AGENDA = {
     }
   ]
 };
+
+/* ============================================================================
+   HOTEL MAP PINS
+   ----------------------------------------------------------------------------
+   Coordinates are percentages of the floor-plan image, measured off the real
+   pixels — x from the left edge, y from the top. The pin and its legend row
+   share the same number.
+
+   `rooms` matches the `room` field on agenda items. Any pin that lists rooms
+   shows a live count of what happens there, so it stays right if the agenda
+   changes. Leave it off for places with no sessions.
+   ========================================================================== */
+
+const MAP_PINS = [
+  // The ballroom's own labels run 3-2-1 left to right on the top row,
+  // and 4-5-6 left to right on the bottom. Coordinates below match that.
+  { n: 1, x: 35.8, y: 40.0, name: "Statler 1",
+    note: "Breakout room — Education Circuits", rooms: ["Statler 1"] },
+  { n: 2, x: 29.1, y: 40.0, name: "Statler 2",
+    note: "Breakout room — Education Circuits", rooms: ["Statler 2"] },
+  { n: 3, x: 22.4, y: 40.0, name: "Statler 3",
+    note: "Breakout room — Education Circuits", rooms: ["Statler 3"] },
+  { n: 4, x: 29.1, y: 58.4, name: "Statler 456",
+    note: "General sessions, keynotes, breakfast and lunch", rooms: ["Statler 456"] },
+  { n: 5, x: 16.0, y: 60.0, name: "Statler Foyer",
+    note: "Check-in, exhibitor booths, breaks, and the Wednesday Welcome Reception",
+    rooms: ["Statler Foyer"] },
+  { n: 6, x: 75.4, y: 83.9, name: "The Henley",
+    note: "Thursday evening reception — kitchen & bar off the lobby",
+    rooms: ["The Henley"] },
+  { n: 7, x: 52.7, y: 51.6, name: "Front Desk",
+    note: "Hotel registration and guest services" },
+  { n: 8, x: 47.7, y: 20.6, name: "Restrooms",
+    note: "Between the Palmer and Statler corridors" },
+  { n: 9, x: 78.9, y: 6.6, name: "Fitness Center",
+    note: "Far end of the north corridor" }
+];
 
 /* ============================================================================
    CIRCUIT SPONSORS

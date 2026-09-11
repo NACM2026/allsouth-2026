@@ -15,13 +15,13 @@ URIs and there is nothing nested left to lose.
 | File | What it is | Do you edit it? |
 |---|---|---|
 | `data.js` | **All content and settings** — agenda, wifi, roster URL, sponsors, exhibitors, links | **Yes — this is the only file you normally touch** |
-| `logos.js` | Every logo and the wordmark, embedded as data URIs. Generated — don't hand-edit | No |
+| `logos.js` | Every logo, the wordmark, and the hotel floor plan, embedded as data URIs. Generated — don't hand-edit | No |
 | `index.html` | The app itself (layout, styling, behavior) | Rarely |
-| `sw.js` | Offline caching. Bump `CACHE = 'as26-v8'` → `'as26-v9'` (and so on) when you change content | Only to force a refresh |
+| `sw.js` | Offline caching. Bump `CACHE = 'as26-v10'` → `'as26-v11'` (and so on) when you change content | Only to force a refresh |
 | `manifest.json` | Makes it installable to a phone home screen | No |
 | `icon-*.png` | Home-screen icons (4 files) | No |
 | `roster-template.csv` | Starter file for the attendee Google Sheet | Not part of the app |
-| `hotel-map.png` | **Not included yet.** Drop the floor plan in at the top level and the map section appears automatically | Yes, when you get it |
+
 
 ### How images work now
 
@@ -154,7 +154,7 @@ wifi: {
 
 Leave the wifi fields blank and the Info tab shows *"The hotel hasn't released the conference network details yet"* — no broken state. Fill them in when the hotel comes through, commit, and bump the `CACHE` version in `sw.js` so installed phones pick up the change.
 
-**Hotel map:** save the floor plan as `hotel-map.png` at the top level of the repo. The Info tab detects it and adds a tappable Hotel Map section. If the file isn't there, the section doesn't render at all. (Send it to me instead and I'll embed it like the logos.)
+**Hotel map:** done — see the Map tab section below.
 
 Also worth filling in when you have them:
 
@@ -217,6 +217,52 @@ The tradeoff: notes don't sync between a phone and a laptop, and clearing browse
 If you ever want notes to sync across devices, that requires a backend (Supabase, like the TRMA benchmarking portal) and some form of sign-in. Different project.
 
 ---
+
+## The Map tab
+
+The Hilton Southlake first-floor plan with nine numbered pins. Tap a pin or a
+legend row and both highlight together; a legend tap also scrolls the map to
+that pin. **Zoom in** switches between fit-to-width and 2.4× with panning.
+
+Pin coordinates live in `MAP_PINS` in `data.js` as percentages of the image,
+measured off the real pixels rather than eyeballed:
+
+```js
+{ n: 4, x: 29.1, y: 58.4, name: "Statler 456",
+  note: "General sessions, keynotes, breakfast and lunch",
+  rooms: ["Statler 456"] },
+```
+
+`rooms` matches the `room` field on agenda items, so each legend row shows a
+**live count** of what happens there. Change the agenda and the counts follow —
+nothing to keep in sync by hand. Omit `rooms` for places with no sessions
+(restrooms, fitness centre).
+
+**A note on the ballroom numbering:** the Statler sections run **3-2-1 left to
+right** on the top row and **4-5-6 left to right** on the bottom. That is not
+intuitive, and it is exactly the kind of thing worth checking against the map
+before printing signage. The pins match the hotel's own labels.
+
+The floor plan itself is embedded in `logos.js` under the key `hotel-map`, so it
+travels with the app like the sponsor logos.
+
+## Add to Home Screen
+
+Two entry points, no tab of its own:
+
+1. **A dismissible banner** at the top of the app on first visit. Tapping it
+   opens the instructions; the **×** hides it for good on that device.
+2. **A card at the top of the Info tab**, always available.
+
+The instructions are **platform-aware** — iPhone gets Safari's Share → Add to
+Home Screen, Android gets Chrome's ⋮ menu, a desktop browser gets the address-bar
+install icon, and someone on Chrome for iPhone is told to switch to Safari
+(iOS only allows it from there). If the app is already installed, both entry
+points say so instead of giving pointless steps.
+
+This deliberately isn't a tab. Installing is a once-per-attendee action, and a
+permanent tab would spend prime navigation space on something nobody opens
+twice. Say the word if you'd rather have the tab and it's a small change.
 
 ## Sticky headers
 
