@@ -373,6 +373,7 @@ const EXHIBITORS = [
   { name: "Montopay",                   logo: "assets/logos/montopay.png" },
   { name: "NACM Collection Services",   logo: "assets/logos/nacm-collections.png" },
   { name: "NCS Credit",                 logo: "assets/logos/ncs-credit.png" },
+  { name: "Nectarine Credit",           logo: "assets/logos/nectarine-credit.png" },
   { name: "NetNow",                     logo: "assets/logos/netnow.png" },
   { name: "Nuvo",                        logo: "assets/logos/nuvo.png" },
   { name: "Zoom Lien",                  logo: "assets/logos/zoomlien.png" }
