@@ -97,9 +97,9 @@ const AGENDA = {
     },
     {
       start: "12:15", end: "13:00", room: "Statler 2", kind: "session",
-      title: "Next Level Communication Skills",
-      speaker: "Diana Crowe, CGA — NACM Southwest",
-      desc: "Effective communication is the cornerstone of professional success, yet most of us overlook the subtle, powerful cues that elevate interactions from competent to exceptional. You'll walk away with practical tools to recognize, interpret, and respond to these cues in real-world settings, deepening your ability to lead with empathy, clarity, and influence."
+      title: "Collections Tips & Tricks",
+      speaker: "Paul Krause — NACM Southwest",
+      desc: "Join NACM Southwest's own Paul Krause for a practical, no-nonsense session designed to sharpen your collections game. Paul will walk through a full spectrum of real-world strategies — from risk reduction and internal collections processes to tackling past due accounts head-on. He'll also cover how to handle common debtor excuses, know when it's time to write off a balance or escalate to a collections agency, and when referring the matter to an attorney is the right call. Whether you're new to credit or a seasoned pro, you'll walk away with tools you can put to work immediately."
     },
     { start: "13:00", end: "13:15", room: "Statler Foyer", title: "Break", kind: "break" },
     {
@@ -220,9 +220,9 @@ const AGENDA = {
     },
     {
       start: "14:15", end: "15:30", room: "Statler 3", kind: "session", circuit: "Education Circuit III",
-      title: "Collections Tips & Tricks",
-      speaker: "Paul Krause — NACM Southwest",
-      desc: "Join NACM Southwest's own Paul Krause for a practical, no-nonsense session designed to sharpen your collections game. Paul will walk through a full spectrum of real-world strategies — from risk reduction and internal collections processes to tackling past due accounts head-on. He'll also cover how to handle common debtor excuses, know when it's time to write off a balance or escalate to a collections agency, and when referring the matter to an attorney is the right call. Whether you're new to credit or a seasoned pro, you'll walk away with tools you can put to work immediately."
+      title: "Next Level Communication Skills",
+      speaker: "Diana Crowe, CGA — NACM Southwest",
+      desc: "Effective communication is the cornerstone of professional success, yet most of us overlook the subtle, powerful cues that elevate interactions from competent to exceptional. You'll walk away with practical tools to recognize, interpret, and respond to these cues in real-world settings, deepening your ability to lead with empathy, clarity, and influence."
     },
 
     { start: "15:30", end: "15:45", room: "Statler Foyer", title: "Break", kind: "break",
