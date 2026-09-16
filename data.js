@@ -294,26 +294,45 @@ const AGENDA = {
 const MAP_PINS = [
   // The ballroom's own labels run 3-2-1 left to right on the top row,
   // and 4-5-6 left to right on the bottom. Coordinates below match that.
-  { n: 1, x: 35.8, y: 40.0, name: "Statler 1",
+  { n: 1, x: 42.2, y: 50.0, name: "Statler 1",
     note: "Breakout room — Education Circuits", rooms: ["Statler 1"] },
-  { n: 2, x: 29.1, y: 40.0, name: "Statler 2",
+  { n: 2, x: 34.6, y: 50.0, name: "Statler 2",
     note: "Breakout room — Education Circuits", rooms: ["Statler 2"] },
-  { n: 3, x: 22.4, y: 40.0, name: "Statler 3",
+  { n: 3, x: 26.9, y: 50.0, name: "Statler 3",
     note: "Breakout room — Education Circuits", rooms: ["Statler 3"] },
-  { n: 4, x: 29.1, y: 58.4, name: "Statler 456",
+  { n: 4, x: 34.8, y: 69.0, name: "Statler 456",
     note: "General sessions, keynotes, breakfast and lunch", rooms: ["Statler 456"] },
-  { n: 5, x: 16.0, y: 60.0, name: "Statler Foyer",
+  { n: 5, x: 21.4, y: 34.0, name: "Statler Foyer",
     note: "Check-in, exhibitor booths, breaks, and the Wednesday Welcome Reception",
     rooms: ["Statler Foyer"] },
-  { n: 6, x: 75.4, y: 83.9, name: "The Henley",
+  { n: 6, x: 84.4, y: 78.0, name: "The Henley",
     note: "Thursday evening reception — kitchen & bar off the lobby",
     rooms: ["The Henley"] },
-  { n: 7, x: 52.7, y: 51.6, name: "Front Desk",
-    note: "Hotel registration and guest services" },
-  { n: 8, x: 47.7, y: 20.6, name: "Restrooms",
-    note: "Between the Palmer and Statler corridors" },
-  { n: 9, x: 78.9, y: 6.6, name: "Fitness Center",
+  { n: 7, x: 60.2, y: 47.8, name: "Front Office",
+    note: "Hotel front desk — registration and guest services" },
+  { n: 8, x: 51.0, y: 20.8, name: "Restrooms",
+    note: "Off the corridor between the Statler Foyer and the lobby" },
+  { n: 9, x: 88.6, y: 13.5, name: "Fitness Center",
     note: "Far end of the north corridor" }
+];
+
+/* ============================================================================
+   PARTNERS
+   ----------------------------------------------------------------------------
+   Shown on the Partners tab. Each row is the logo, the company name, an
+   optional one-line note, and the link that opens when it is tapped.
+   Logos are keyed to logos.js, same as everywhere else.
+   ========================================================================== */
+
+const PARTNERS = [
+  { name: "United TranzActions",
+    logo: "assets/logos/uta.png",
+    url:  "https://go.unitedtranzactions.com/billfire",
+    note: "" },
+  { name: "ZoomLien",
+    logo: "assets/logos/zoomlien.png",
+    url:  "https://www.zoomlien.com/",
+    note: "" }
 ];
 
 /* ============================================================================

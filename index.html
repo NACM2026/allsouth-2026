@@ -307,6 +307,21 @@ header{
 .legend .txt span{display:block;font-size:12.5px;color:var(--ink-2);margin-top:2px;line-height:1.45}
 .legend .cnt{font-size:11px;font-weight:700;color:var(--blue);margin-top:4px;display:block}
 
+/* ---------- partners ---------- */
+.plist{list-style:none;margin:12px 16px;padding:0;display:flex;flex-direction:column;gap:10px}
+.plist a{display:flex;align-items:center;gap:13px;text-decoration:none;color:inherit;
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--r);
+  box-shadow:var(--shadow);padding:12px 13px;-webkit-tap-highlight-color:transparent}
+.plist a:active{background:var(--surface-2)}
+.plist .mark{flex:0 0 74px;height:74px;background:#fff;border:1px solid var(--line-2);
+  border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;padding:8px}
+.plist .mark img{max-width:100%;max-height:100%;object-fit:contain}
+.plist .txt{flex:1 1 auto;min-width:0}
+.plist b{display:block;font-size:15.5px;font-weight:750;line-height:1.3}
+.plist .note{display:block;font-size:12.5px;color:var(--ink-2);margin-top:3px;line-height:1.45}
+.plist .chev{flex:0 0 auto;color:var(--ink-3)}
+.plist .chev svg{width:18px;height:18px}
+
 /* ---------- install help ---------- */
 .installcard{margin:14px 16px;background:var(--navy);color:#fff;border-radius:var(--r);padding:16px}
 .installcard h2{margin:0 0 6px;font-size:15.5px;font-weight:750}
@@ -348,16 +363,16 @@ nav{
   background:color-mix(in srgb,var(--surface) 92%, transparent);
   backdrop-filter:saturate(180%) blur(14px);-webkit-backdrop-filter:saturate(180%) blur(14px);
   border-top:1px solid var(--line);
-  display:grid;grid-template-columns:repeat(5,1fr);
+  display:grid;grid-template-columns:repeat(6,1fr);
   padding-bottom:var(--safe-b);
 }
 nav button{
-  border:0;background:none;padding:8px 2px 7px;display:flex;flex-direction:column;
-  align-items:center;gap:3px;color:var(--ink-3);font-size:9.5px;font-weight:650;
+  border:0;background:none;padding:8px 1px 7px;display:flex;flex-direction:column;
+  align-items:center;gap:3px;color:var(--ink-3);font-size:9px;font-weight:650;
   -webkit-tap-highlight-color:transparent;
 }
 nav button.on{color:var(--blue)}
-nav svg{width:22px;height:22px}
+nav svg{width:21px;height:21px}
 .badge{
   position:absolute;transform:translate(15px,-4px);background:var(--blue);color:#fff;
   border-radius:99px;min-width:16px;height:16px;font-size:10px;font-weight:800;
@@ -470,6 +485,11 @@ textarea:focus{outline:2px solid color-mix(in srgb,var(--blue) 45%,transparent);
   <div id="infoBody"></div>
 </section>
 
+<!-- ===================== PARTNERS ===================== -->
+<section class="view" id="view-partners">
+  <div id="partnersBody"></div>
+</section>
+
 <!-- ===================== NAV ===================== -->
 <nav id="nav">
   <button data-tab="agenda" class="on">
@@ -492,6 +512,10 @@ textarea:focus{outline:2px solid color-mix(in srgb,var(--blue) 45%,transparent);
   <button data-tab="info">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5.5M12 7.7v.3"/></svg>
     Info
+  </button>
+  <button data-tab="partners">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M10.2 13.9a3.9 3.9 0 005.8 0l2.3-2.5a4.1 4.1 0 00-5.8-5.8l-1.3 1.2"/><path d="M13.8 10.1a3.9 3.9 0 00-5.8 0l-2.3 2.5a4.1 4.1 0 005.8 5.8l1.3-1.2"/></svg>
+    Partners
   </button>
 </nav>
 
@@ -622,6 +646,7 @@ function setTab(t){
   window.scrollTo(0,0);
   if(t === 'notes') renderNotes();
   if(t === 'map')   renderMap();
+  if(t === 'partners') renderPartners();
   if(t === 'people' && !ROSTER_TRIED) loadRoster();
 }
 $$('#nav button').forEach(b => b.addEventListener('click', () => setTab(b.dataset.tab)));
@@ -1178,6 +1203,29 @@ function renderMap(){
   }
   $$('#mapBody .pin').forEach(b => b.addEventListener('click', () => select(+b.dataset.pin, false)));
   $$('#mapBody .legend li').forEach(li => li.addEventListener('click', () => select(+li.dataset.leg, true)));
+}
+
+/* ============================ partners tab ============================ */
+function renderPartners(){
+  const box = $('#partnersBody');
+  if(typeof PARTNERS === 'undefined' || !PARTNERS.length){
+    box.innerHTML = '<div class="empty">Partners coming soon.</div>';
+    return;
+  }
+  const chev = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" '
+    + 'stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>';
+
+  box.innerHTML = '<p class="maphint">Tap a partner to visit their site.</p>'
+    + '<ul class="plist">'
+    + PARTNERS.map(p =>
+        '<li><a href="' + esc(p.url) + '" target="_blank" rel="noopener">'
+        + '<span class="mark"><img src="' + esc(resolveLogo(p.logo)) + '" alt="' + esc(p.name) + '"'
+        + ' loading="lazy" onerror="imgFallback(this)"></span>'
+        + '<span class="txt"><b>' + esc(p.name) + '</b>'
+        + (p.note ? '<span class="note">' + esc(p.note) + '</span>' : '')
+        + '</span><span class="chev">' + chev + '</span></a></li>'
+      ).join('')
+    + '</ul>';
 }
 
 /* ============================ add to home screen ============================ */
