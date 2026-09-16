@@ -376,6 +376,7 @@ const EXHIBITORS = [
   { name: "Nectarine Credit",           logo: "assets/logos/nectarine-credit.png" },
   { name: "NetNow",                     logo: "assets/logos/netnow.png" },
   { name: "Nuvo",                        logo: "assets/logos/nuvo.png" },
+  { name: "Veruta",                     logo: "assets/logos/veruta.png" },
   { name: "Zoom Lien",                  logo: "assets/logos/zoomlien.png" }
 ];
 
