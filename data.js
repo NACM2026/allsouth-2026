@@ -97,7 +97,7 @@ const AGENDA = {
     },
     {
       start: "12:15", end: "13:00", room: "Statler 2", kind: "session",
-      title: "Collections Tips & Tricks",
+      title: "Collections Tips for the Credit Professional",
       speaker: "Paul Krause — NACM Southwest",
       desc: "Join NACM Southwest's own Paul Krause for a practical, no-nonsense session designed to sharpen your collections game. Paul will walk through a full spectrum of real-world strategies — from risk reduction and internal collections processes to tackling past due accounts head-on. He'll also cover how to handle common debtor excuses, know when it's time to write off a balance or escalate to a collections agency, and when referring the matter to an attorney is the right call. Whether you're new to credit or a seasoned pro, you'll walk away with tools you can put to work immediately."
     },
@@ -196,7 +196,7 @@ const AGENDA = {
     },
     {
       start: "12:45", end: "14:00", room: "Statler 3", kind: "session", circuit: "Education Circuit II",
-      title: "Building Best in Class Teams",
+      title: "A Team for the \"Win\"",
       speaker: "Joseph Grass, CICP & Chason Dancer, CBA — DXP Enterprises",
       desc: "A high-performing credit department starts with a strong team. But what does it take to build, develop, and retain top talent? Join Joseph and Chason as they share their experiences building best-in-class credit teams. Learn practical strategies for hiring the right people, fostering a culture of excellence, and creating a team that drives results!"
     },
