@@ -230,9 +230,9 @@ const AGENDA = {
 
     {
       start: "15:45", end: "16:45", room: "Statler 1", kind: "session", circuit: "Education Circuit IV",
-      title: "Expanding Your Credit Skill Sets into Supplier Risk Management",
-      speaker: "Kevin Chandler, ICCE, CCE, CICP, RGCP",
-      desc: "Today's credit professionals play a critical role beyond managing customer risk. As supply chains become more complex, expanding your expertise into supplier risk management can help strengthen your organization and create greater business value. Join us as we explore strategies for developing supplier diversity with clear objectives and accountability, conducting broader due diligence, implementing real-time monitoring systems, and leveraging emerging technologies. Discover how these tools and best practices can help you identify potential risks earlier, build stronger supplier relationships, and become a more strategic business partner."
+      title: "AI Mythbusters: Preparing Your Portfolio for AI That Actually Delivers",
+      speaker: "Rhonda Buras, Senior SME, Finance & Credit Risk — Dun & Bradstreet",
+      desc: "For years, automation was the hallmark of an efficient credit and accounts receivable operation. Today, that buzzword has been replaced by AI. But what does AI really mean for credit and A/R — and what is just hype? In this session, Dun & Bradstreet’s Rhonda Buras will cut through the hype to explain how AI should be practically applied in credit risk management today. Attendees will learn why any initiative can only be as effective as the data behind it, and how teams can maintain their A/R portfolio’s integrity in the age of AI. Rhonda will explore how to ensure their portfolio is AI-ready so that the downstream insights can help to surface risk faster, identify patterns, and prioritize where expert judgment matters most. Just as automation once helped teams scale without sacrificing control, AI can enhance — not replace — the role of the credit professional."
     },
     {
       start: "15:45", end: "16:45", room: "Statler 2", kind: "session", circuit: "Education Circuit IV",
@@ -332,6 +332,14 @@ const PARTNERS = [
   { name: "ZoomLien",
     logo: "assets/logos/zoomlien.png",
     url:  "https://www.zoomlien.com/",
+    note: "" },
+  { name: "Dun & Bradstreet",
+    logo: "assets/logos/dun-bradstreet.png",
+    url:  "https://www.nacmsw.com/partners/dun-and-bradstreet/",
+    note: "" },
+  { name: "Experian",
+    logo: "assets/logos/experian.png",
+    url:  "https://www.nacmsw.com/partners/experian-commercial-credit-reports/",
     note: "" }
 ];
 
