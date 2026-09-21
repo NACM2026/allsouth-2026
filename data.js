@@ -396,6 +396,7 @@ const EXHIBITORS = [
   { name: "Emagia",                     logo: "assets/logos/emagia.png" },
   { name: "Experian",                   logo: "assets/logos/experian.png" },
   { name: "Handle.com",                 logo: "assets/logos/handle.png" },
+  { name: "HighRadius",                 logo: "assets/logos/highradius.png" },
   { name: "Levelset",                   logo: "assets/logos/levelset.png" },
   { name: "Montopay",                   logo: "assets/logos/montopay.png" },
   { name: "NACM Collection Services",   logo: "assets/logos/nacm-collections.png" },
@@ -421,5 +422,6 @@ const UPCOMING = [
   { date: "Wed. 12/2",   title: "Houston Holiday Party" },
   { date: "Wed. 12/2",   title: "Tulsa Holiday Party" },
   { date: "Thurs. 12/3", title: "New Orleans Holiday Party" },
-  { date: "Thurs. 12/3", title: "OKC Holiday Party" }
+  { date: "Thurs. 12/3", title: "OKC Holiday Party" },
+  { date: "Tues. 12/8",  title: "Austin/San Antonio Holiday Party" }
 ];
