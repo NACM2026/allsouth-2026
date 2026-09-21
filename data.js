@@ -250,7 +250,7 @@ const AGENDA = {
     {
       start: "17:30", end: "19:30", room: "The Henley", kind: "social",
       title: "Thursday Reception at The Henley",
-      desc: "The conference may wrap up for the day, but the fun is just getting started! Join us Thursday evening for a memorable night of great food, drinks, and networking with fellow credit professionals from across the region. We're putting the finishing touches on an exciting experience, and we can't wait to share what's in store. Stay tuned — this is one event you won't want to miss!",
+      desc: "No need to go far for a great night out! Join us at The Henley, the hotel's on-site restaurant and bar, for an evening of great food, drinks, music, and a little friendly competition. Enjoy delicious apps and custom cocktails, kick back to live music, and jump into fun activities throughout the evening to earn extra raffle tickets. Hang on to those tickets — they'll be used for the prize drawings on Friday! The more tickets you earn Thursday night, the more chances you'll have to win when the prizes are drawn on Friday! We'll see you at The Henley!",
       sponsor: { name: "NACM National Trade Credit Report", logo: "assets/logos/nacm-ntcr.png" }
     }
   ],
