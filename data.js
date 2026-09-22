@@ -12,11 +12,11 @@ const CONFIG = {
   venueAddress: "1400 Plaza Place, Southlake, TX 76092",
   venueMapsUrl: "https://www.google.com/maps/search/?api=1&query=Hilton+Southlake+Town+Square%2C+1400+Plaza+Place%2C+Southlake%2C+TX+76092",
 
-  // ---- WIFI (forthcoming from the hotel) -----------------------------------
+  // ---- WIFI ------------------------------------------------------------------
   wifi: {
-    network: "",                 // e.g. "AllSouth26"
-    password: "",                // e.g. "credit2026"
-    note: ""                     // e.g. "Select 'Conference' then accept the terms"
+    network: "Hilton Honors Meetings",
+    password: "DFWSL",
+    note: "Join the Hilton Honors Meetings network, then enter DFWSL when the sign-in page asks for the password."
   },
 
   // ---- LIVE ATTENDEE LIST --------------------------------------------------
