@@ -220,9 +220,9 @@ const AGENDA = {
     },
     {
       start: "14:15", end: "15:30", room: "Statler 3", kind: "session", circuit: "Education Circuit III",
-      title: "Next Level Communication Skills",
-      speaker: "Diana Crowe, CGA — NACM Southwest",
-      desc: "Effective communication is the cornerstone of professional success, yet most of us overlook the subtle, powerful cues that elevate interactions from competent to exceptional. You'll walk away with practical tools to recognize, interpret, and respond to these cues in real-world settings, deepening your ability to lead with empathy, clarity, and influence."
+      title: "The Cost of War — Excuse Me, Military Engagement: Projecting the Effects of the Iran Conflict on the Supply Chain",
+      speaker: "Kevin Wiley, Esq. — Hicks Law Group",
+      desc: "Without question, the conflict with Iran creates significant economic uncertainty through higher energy costs, inflation, supply chain disruptions, and increased credit risk. Credit managers play a crucial role in protecting company cash flow and minimizing bad debt by strengthening credit controls, closely monitoring customer financial health, and proactively managing risk during periods of geopolitical instability. This presentation will assist credit managers in their roles of managing risks during this period of economic instability by discussing the energy market disruptions, inflationary pressures, supply chain challenges, and increased financial risk exposure for contractors, suppliers, and project owners caused by the Iran conflict."
     },
 
     { start: "15:30", end: "15:45", room: "Statler Foyer", title: "Break", kind: "break",
@@ -236,9 +236,9 @@ const AGENDA = {
     },
     {
       start: "15:45", end: "16:45", room: "Statler 2", kind: "session", circuit: "Education Circuit IV",
-      title: "The Cost of War — Excuse Me, Military Engagement: Projecting the Effects of the Iran Conflict on the Supply Chain",
-      speaker: "Kevin Wiley, Esq. — Hicks Law Group",
-      desc: "Without question, the conflict with Iran creates significant economic uncertainty through higher energy costs, inflation, supply chain disruptions, and increased credit risk. Credit managers play a crucial role in protecting company cash flow and minimizing bad debt by strengthening credit controls, closely monitoring customer financial health, and proactively managing risk during periods of geopolitical instability. This presentation will assist credit managers in their roles of managing risks during this period of economic instability by discussing the energy market disruptions, inflationary pressures, supply chain challenges, and increased financial risk exposure for contractors, suppliers, and project owners caused by the Iran conflict."
+      title: "Next Level Communication Skills",
+      speaker: "Diana Crowe, CGA — NACM Southwest",
+      desc: "Effective communication is the cornerstone of professional success, yet most of us overlook the subtle, powerful cues that elevate interactions from competent to exceptional. You'll walk away with practical tools to recognize, interpret, and respond to these cues in real-world settings, deepening your ability to lead with empathy, clarity, and influence."
     },
     {
       start: "15:45", end: "16:45", room: "Statler 3", kind: "session", circuit: "Education Circuit IV",
